@@ -15,11 +15,64 @@ yours to authorise.
 
 ## The problem
 
-You're hungry and you half-know what you want. You do **not** know which of the
-seventeen things a recipe lists you already own — and you're not going to stand in the
-kitchen cross-referencing a food blog against your own shelves.
+**Deciding what to eat is easy. Everything between that and eating is the problem.**
 
-So you order in, or you buy things you already have.
+You want something good tonight. Between wanting it and cooking it sits a chore chain:
+
+```
+find a dish worth making      →  YouTube, a blog, someone's reel
+open five tabs                →  none of which agree on anything
+read the ingredient list      →  17 lines, half of them spices
+go check the kitchen          →  open cupboards, try to remember
+work out what's MISSING       →  ← the genuinely hard bit
+open a grocery app            →  type each item, guess the pack size
+                              →  buy turmeric you already had
+                              →  forget the kasuri methi
+```
+
+Forty minutes of admin for one dinner. So most people don't. **They order in, or they
+cook the same three dishes until they can't face them.**
+
+### Three different people hit the exact same wall
+
+**The one doing the maths.** In Bangalore, Delhi, Mumbai, eating out daily stopped being
+a lifestyle choice and became a budget decision. Cooking is the obvious answer — in our
+own runs a real dinner costs **₹95–₹180** to cook, a fraction of the delivered price. But
+cooking to save money collapses into the same dal on repeat, and the day it gets boring,
+the ordering starts again. **Variety is what makes cooking survivable**, and variety is
+exactly what takes forty minutes to find.
+
+**The one eating to a number.** Gym, recovery, diabetes, pregnancy, a doctor's
+instruction. They need *100 g of protein today*, not *"something healthy"*. Recipe sites
+already publish that number in their page markup — **81 of 99 pages we read carry it** —
+and not one shopping tool uses it.
+
+**The one who actually loves cooking.** They *want* to make the Kerala soya roast from a
+blog with four hundred readers, or a mango lassi, or a protein shake nobody's app has
+heard of. They'll happily trawl YouTube and six food blogs to find it. Then the chore
+chain kills the enthusiasm before the pan is hot.
+
+### Why nothing solves this today
+
+The good recipes live on the **open web** — thousands of independent blogs, in thirty
+different formats, using cooking words no grocery catalogue has ever seen (*kasuri
+methi*, *hing*, *maida*, *jeera*).
+
+| | Why it stops short |
+|---|---|
+| **Recipe apps** | A curated catalogue. The regional blogs that actually know the dish aren't in it |
+| **Grocery apps** | No idea what a dish needs. You type ingredients one at a time, like 2009 |
+| **Nutrition apps** | They count. They don't shop |
+| **Asking a chatbot** | It writes you a list. You still do all seven chores yourself |
+
+Nobody joins them up — because joining them up isn't an app feature. It needs something
+that can **read the live web**, **reason about one specific kitchen**, and **act on a real
+retailer**.
+
+That is an agent. That is this.
+
+> **We didn't shorten the chore chain. We removed it.**
+> Say what you feel like. Tick what you already own. The cart fills itself.
 
 ---
 
@@ -58,6 +111,19 @@ So you order in, or you buy things you already have.
 ```
 
 Every line in the activity feed is a real API call. **Nothing is scripted.**
+
+### Whatever you feel like, not whatever's in a catalogue
+
+It reads any page publishing schema.org `Recipe` markup, so the range is the web's, not
+ours. One run for "paneer" pulled **35 pages from 21 distinct sites** — hebbarskitchen,
+vegrecipesofindia, indianhealthyrecipes, tarladalal, nishamadhulika, ministryofcurry,
+rakskitchen, cult.fit, BBC Good Food, NYT Cooking.
+
+A 22-ingredient biryani works. So does a **four-ingredient milkshake** — we found that one
+the hard way, because an early rule demanded six ingredients on the logic that *"a real
+Indian main has 8+ lines"*, and quietly threw away every shake and smoothie on the
+internet. Protein shakes, lassis, one-pan dinners, regional dishes nobody's app has heard
+of: if a blog published it properly, Sous can cook it.
 
 ---
 
