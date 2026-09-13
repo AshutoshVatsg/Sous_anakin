@@ -42,6 +42,7 @@ So you order in, or you buy things you already have.
 │   what do you ALREADY have?        "you have 5 of 14"           │
 │   what does the dish REALLY need?  scaled, merged, rounded      │
 │   what will it cost?               fresh vs pantry, split out   │
+│   hitting a protein target?        read from the recipe, free   │
 │   5 dishes — different dishes, styles AND sites                 │
 └─────────────────────────────────────────────────────────────────┘
    ▼  you pick one
@@ -169,6 +170,63 @@ substituted for it:
 Every override is reported live in the activity feed. **64 tests** pin this behaviour.
 
 ---
+
+## Eating to a target, not just to a craving
+
+Plenty of people don't shop by craving — they shop to a **protein target**. Gym, recovery,
+diabetes, pregnancy, a doctor's instruction. *"100g protein under ₹600"* is a real
+sentence, and Sous answers it as one constraint, not two keywords:
+
+```
+> 100g protein under 600
+
+plan     read that as: paneer · high protein
+search   8 angles · 40 distinct pages · 16 read, 14 usable
+protein  a serving: 47 g, 21 g, 18 g, 15 g, 4 g · 3 servings of the best reaches 100 g
+budget   5 of 5 cook for under ₹600
+
+ 47 g · 47%   Fish Fry              ≈ ₹117 to cook   foodnetwork.com
+ 21 g · 21%   Dahi Chicken Curry    ≈ ₹ 95 to cook   whiskaffair.com
+ 18 g · 18%   Kerala Soya Roast     ≈ ₹147 to cook   hebbarskitchen.com
+ 15 g · 15%   Egg Bhurji            ≈ ₹122 to cook   thekitchn.com
+  4 g ·  4%   Moong Dal Chilla      ≈ ₹ 83 to cook   vegrecipesofindia.com
+```
+
+**The protein number is never invented.** Of 99 recipe pages we'd scraped, **81 publish
+`nutrition.proteinContent`** in the JSON-LD we were already reading — so it costs no extra
+call and no model guess. Where a site doesn't publish it, the card says **"protein not
+published"** rather than making a number up. On a health constraint, a confident wrong
+figure is worse than an honest gap.
+
+- **The goal is parsed before the price.** Otherwise *"100g protein under ₹600"* hands the
+  100 to the budget parser and plans a hundred-rupee dinner.
+- **Nothing is hardcoded about what protein is.** The planner knows paneer, chicken, fish,
+  eggs and soya are where it comes from, and spreads the search across them.
+- **Veg / non-veg is respected** when you say it, and you get both when you don't.
+- It tells you **how many servings reach your goal** — one dish rarely does.
+
+Two real failures this exposed, both fixed: the relevance gate demanded the craving appear
+in the recipe, but for a protein request the "ingredient" is a **goal, not a food** — it
+threw away 9 of 12 pages including a 35 g fish curry. And protein queries kept returning
+listicles (*"15 best high-protein recipes"*) which carry no recipe markup at all. Usable
+pages went from **3 of 12 to 14 of 16**.
+
+## …and it buys the right amounts
+
+A shopping list is useless if the quantities are wrong. All of this is arithmetic, so
+**code does it, never the model**:
+
+| | |
+|---|---|
+| **Scaled to your table** | Recipe serves 4, you're cooking for 2 — every quantity halves |
+| **Merged before rounding** | Garam masala in the marinade *and* the gravy is one line, summed first. Round each separately and you buy two jars |
+| **Counts round up** | Half a bay leaf isn't a thing. You cannot buy a quarter of a cinnamon stick |
+| **Cooks' fractions** | Spoons snap to quarters and render as `1½ tbsp`, not `1.473 tbsp` |
+| **Pack reality, stated** | `needs 250 g, smallest pack is 500 g → 250 g left over` |
+
+That last line is from a real run. The agent doesn't pretend a 500 g pack is 250 g of
+spinach — it tells you what you'll have left, so the number on the card is the number at
+checkout.
 
 ## Five things that actually happened
 
