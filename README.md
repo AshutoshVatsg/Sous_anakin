@@ -12,7 +12,11 @@ on a real retailer. Then stops, because buying is yours to authorise.
 
 ## The problem
 
-Between *"I want something good tonight"* and eating it:
+> ### You don't order in because you can't cook.
+> ### You order in because working out what you *could* cook takes longer than the food takes to arrive.
+
+It's 8pm. There's food in your kitchen. The web has every recipe ever written.
+**Nothing connects the two.** So you do it by hand:
 
 ```
 find a dish  →  open 5 tabs  →  read 17 ingredients  →  go check the cupboards
@@ -21,13 +25,25 @@ find a dish  →  open 5 tabs  →  read 17 ingredients  →  go check the cupbo
              →  buy turmeric you already had  →  forget the kasuri methi
 ```
 
-**Forty minutes of admin for one dinner.** So people order in, or cook the same three
-dishes forever. Recipe apps have a curated catalogue. Grocery apps don't know what a dish
-needs. Nutrition apps count but don't shop. A chatbot writes you a list and leaves you
-all seven chores.
+**Forty minutes of admin. For one dinner. Every dinner.** Nobody does that twice — so
+you order in, or you cook the same three dishes until you can't look at them.
 
-Joining them up isn't an app feature — it needs something that can read the live web,
-reason about *one specific kitchen*, and act on a retailer. **That's an agent.**
+It's the same wall whoever you are:
+
+- **Cooking to save money** in a city where eating out isn't cheap — until it's the same dal for the fifth time
+- **Eating to a number** — *100g of protein*, not *"something healthy"*
+- **Actually loving cooking** — and wanting the Kerala soya roast from a blog with four hundred readers
+
+And nothing on your phone gets you over it. **Recipe apps** have a curated catalogue, so
+the blog that actually knows the dish isn't in it. **Grocery apps** have no idea what a
+dish needs — you type ingredients one at a time, like it's 2009. **Nutrition apps** count,
+but don't shop. **A chatbot** writes you a beautiful list, then leaves you every single
+chore.
+
+Connecting them was never an app feature. It needs something that can **read the live
+web**, **reason about your specific kitchen**, and **act on a real shop**.
+
+**That's an agent. That's this.**
 
 ---
 
