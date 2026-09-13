@@ -8,10 +8,11 @@ twice. The four documents at the repo root are the ones worth reading first.
 
 | | |
 |---|---|
-| `../README.md` | What Sous is, how it works, how to run it |
+| `../README.md` | The hackathon submission — what Sous is, the flow, how it uses Anakin |
+| `../DETAILS.md` | The full engineering write-up — variety, budget, protein, the brain |
 | `../ANAKIN-REFERENCE.md` | Master reference for Anakin.io, compiled from live fetches. Corrects 7 errors in the published docs |
 | `../MINUTES-WIRE.md` | The four Flipkart Minutes Build Studio actions, and the responses they actually return |
-| `../ANAKIN-BUG-REPORT.md` | 11 issues found while building, written up for Anakin's team |
+| `../ANAKIN-BUG-REPORT.md` | 15 issues found while building, written up for Anakin's team |
 
 ## Here
 
