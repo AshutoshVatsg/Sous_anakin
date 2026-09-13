@@ -1,0 +1,33 @@
+export function Icon({ name, size = 20, className = '', ...props }) {
+  const paths = {
+    bowl: <><path d="M3 12h18c-.6 5-3.8 8-9 8s-8.4-3-9-8Z"/><path d="M8 8c-2-2 2-3 0-5m5 5c-2-2 2-3 0-5m5 5c-2-2 2-3 0-5M8 21h8"/></>,
+    pantry: <><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M7 2h10v3M4 11h16m-10 4h4"/></>,
+    basket: <><path d="m8 3-5 7m13-7 5 7M2 10h20l-2 10H4L2 10Zm7 4v3m6-3v3"/></>,
+    leaf: <><path d="M20 3C9 1 3 6 4 13c1 7 13 9 16-10Z"/><path d="M3 21 15 9"/></>,
+    arrow: <><path d="M4 12h16m-6-6 6 6-6 6"/></>,
+    back: <><path d="M20 12H4m6-6-6 6 6 6"/></>,
+    external: <><path d="M14 3h7v7m-1-6-9 9"/><path d="M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></>,
+    search: <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></>,
+    book: <><path d="M12 5c-3-2-6-2-10-1v15c4-1 7-1 10 1 3-2 6-2 10-1V4c-4-1-7-1-10 1Zm0 0v15"/></>,
+    check: <path d="m5 12 4 4L19 6"/>,
+    close: <path d="m6 6 12 12M6 18 18 6"/>,
+    plus: <path d="M12 5v14M5 12h14"/>,
+    minus: <path d="M5 12h14"/>,
+    clock: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
+    people: <><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4c3 0 4 3 4 6"/></>,
+    sliders: <><path d="M4 7h5m5 0h6M4 17h10m5 0h1"/><circle cx="11" cy="7" r="2"/><circle cx="16" cy="17" r="2"/></>,
+    sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/></>,
+    moon: <path d="M21 13a9 9 0 0 1-10-10 9 9 0 1 0 10 10Z"/>,
+    activity: <path d="M2 12h4l3-8 6 16 3-8h4"/>,
+    shield: <><path d="m12 2 8 3v7c0 5-8 10-8 10S4 17 4 12V5l8-3Z"/><path d="m8 12 3 3 5-6"/></>,
+    chevron: <path d="m8 4 8 8-8 8"/>,
+    down: <path d="m5 9 7 7 7-7"/>,
+    star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>,
+    alert: <><path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/><path d="M12 8v5m0 4h.01"/></>,
+    swap: <><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></>,
+    jar: <><path d="M8 3h8v4H8zM7 7h10l2 4v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-8l2-4Z"/><path d="M5 13h14m-14 4h14"/></>,
+    phone: <><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></>,
+    history: <><path d="M3 3v5h5"/><path d="M3 8a9 9 0 1 1-1 7m10-8v5l4 2"/></>,
+  };
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" {...props}>{paths[name] || paths.bowl}</svg>;
+}

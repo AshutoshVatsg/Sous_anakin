@@ -1,0 +1,28 @@
+{
+  "name": "sous",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "cli": "node run.js",
+    "prices": "node prices.js",
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "next": "^16.3.5",
+    "playwright-core": "^1.63.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3"
+  }
+}

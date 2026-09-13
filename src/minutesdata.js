@@ -1,0 +1,97 @@
+// Flipkart Minutes product data via the Build Studio actions.
+//
+// These actions live on the account that BUILT them (custom Wire actions are
+// account-scoped), which is not necessarily the key in .env — so the Wire key is
+// configured separately from whatever key the rest of the app uses.
+//
+// Why this matters: `available_quantity` is NOT present anywhere in the Minutes
+// page DOM. An item can render an Add button, be capped at qty 2, and the click
+// silently does nothing. Wire is the only way to know before trying.
+import fs from 'node:fs';
+import path from 'node:path';
+
+const ROOT = process.cwd();
+
+function wireKey() {
+  if (process.env.ANAKIN_WIRE_KEY) return process.env.ANAKIN_WIRE_KEY.trim();
+  try {
+    const env = fs.readFileSync(path.join(ROOT, '.env'), 'utf8');
+    const m = env.match(/^ANAKIN_WIRE_KEY=(.+)$/m);
+    if (m) return m[1].trim();
+    return (env.match(/ask_[a-f0-9]+/) || [])[0];   // fall back to the main key
+  } catch { return null; }
+}
+
+const KEY = wireKey();
+const CATALOG = 'flipkart-com';
+// list_products needs a pid/lid anchor even though it returns the surrounding catalogue.
+const ANCHOR = { product_id: 'FFWH32SZNFU8YB6F', listing_id: 'LSTFFWH32SZNFU8YB6FM6QZLT' };
+
+// Every Wire action is 1 credit. Counted here so the UI can show the spend as it
+// happens — on a 300-credit account, what an agent costs is part of what it is.
+let spent = 0;
+const calls = [];
+export const wireSpend = () => ({ credits: spent, calls: [...calls] });
+export const resetSpend = () => { spent = 0; calls.length = 0; };
+
+async function run(action_id, params, { retries = 3 } = {}) {
+  for (let i = 0; i < retries; i++) {
+    const t0 = Date.now();
+    const res = await fetch('https://api.anakin.io/v1/wire-run', {
+      method: 'POST',
+      headers: { 'X-API-Key': KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action_id, params }),
+    });
+    const j = await res.json();
+    spent += 1;
+    calls.push({ action: action_id, ms: Date.now() - t0, ok: j.status === 'completed' });
+
+    if (j.status === 'completed') return j.data;
+    if (/insufficient_credits/i.test(JSON.stringify(j))) {
+      throw new Error('Anakin credits exhausted on the Wire key — top it up to use the Minutes actions');
+    }
+    // Flipkart's cart API throttles; 429 means wait, not fail.
+    if (/429/.test(j.error || '')) { await new Promise((r) => setTimeout(r, 7000 * (i + 1))); continue; }
+    throw new Error(j.error || j.message || 'wire action failed');
+  }
+  throw new Error('rate limited after retries');
+}
+
+/** Confirm the Build Studio actions are visible to this key before relying on them. */
+export async function check() {
+  const r = await fetch(`https://api.anakin.io/v1/wire/catalog/${CATALOG}`, { headers: { 'X-API-Key': KEY } });
+  const d = await r.json();
+  const actions = (d.actions || []).map((a) => a.action_id);
+  return { count: actions.length, actions, ok: actions.includes('act_flipkart_com_list_products') };
+}
+
+export const setAddress = (pincode = '560102', extra = {}) =>
+  run('act_flipkart_com_set_delivery_address', {
+    pincode, city: 'Bengaluru', state: 'Karnataka',
+    address_line1: '1024, 7th Sector, 20th Cross Road, HSR Layout', ...extra,
+  });
+
+/**
+ * Real Minutes products for a term — name, price, and crucially available_quantity.
+ * Returns them ranked, in-stock first, so the caller can act on genuine stock.
+ */
+export async function products(term) {
+  const d = await run('act_flipkart_com_list_products', {
+    ...ANCHOR,
+    page_uri: `/search?q=${encodeURIComponent(term)}&marketplace=HYPERLOCAL`,
+  });
+  const all = d.products || [];
+  const words = term.toLowerCase().split(/\s+/).filter((w) => w.length > 2);
+  const scored = all.map((p) => ({
+    ...p,
+    _hits: words.filter((w) => (p.product_name || '').toLowerCase().includes(w)).length,
+    inStock: p.available_quantity > 0,
+  }));
+  const relevant = scored.filter((p) => p._hits > 0 || !words.length);
+  const pool = relevant.length ? relevant : scored;
+  return pool.sort((a, b) => b.inStock - a.inStock || b._hits - a._hits || a.price - b.price);
+}
+
+export const viewCart = () => run('act_flipkart_com_view_cart', ANCHOR);
+export const addToCart = (product_id, listing_id, quantity = 1) =>
+  run('act_flipkart_com_add_to_cart', { product_id, listing_id, quantity });

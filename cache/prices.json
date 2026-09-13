@@ -1,0 +1,134 @@
+{
+  "paneer": {
+    "price": 84,
+    "pack": null,
+    "name": "Gowardhan Block Paneer",
+    "seenAt": "2026-09-13"
+  },
+  "kasuri methi": {
+    "price": 14,
+    "pack": null,
+    "name": "Flipkart Grocery Classic Kasuri Methi",
+    "seenAt": "2026-09-13"
+  },
+  "tomato puree": {
+    "price": 21,
+    "pack": null,
+    "name": "Dabur Hommade Tomato Puree | Ready to Use | Smooth & Rich",
+    "seenAt": "2026-09-13"
+  },
+  "garam masala": {
+    "price": 175,
+    "pack": null,
+    "name": "EVEREST Garam Masala",
+    "seenAt": "2026-09-13"
+  },
+  "ginger garlic paste": {
+    "price": 24,
+    "pack": null,
+    "name": "MOTHER'S RECIPE Ginger Garlic Paste",
+    "seenAt": "2026-09-13"
+  },
+  "butter": {
+    "price": 54,
+    "pack": null,
+    "name": "Nutralite Doodhshakti Probiotic Butter Spread",
+    "seenAt": "2026-09-13"
+  },
+  "cashews": {
+    "price": 257,
+    "pack": null,
+    "name": "OPEN SECRET Premium Whole Kaju - High Protein Dry Fruit, Fasting Vrat Special Cashews",
+    "seenAt": "2026-09-13"
+  },
+  "turmeric": {
+    "price": 28,
+    "pack": null,
+    "name": "AASHIRVAAD Turmeric Powder",
+    "seenAt": "2026-09-13"
+  },
+  "coconut milk": {
+    "price": 77,
+    "pack": null,
+    "name": "Dabur Hommade Coconut Milk | Ready to Use | Smooth & Creamy",
+    "seenAt": "2026-09-13"
+  },
+  "eggs": {
+    "price": 48,
+    "pack": null,
+    "name": "Delish Fresh White Eggs",
+    "seenAt": "2026-09-13"
+  },
+  "tofu": {
+    "price": 48,
+    "pack": null,
+    "name": "Pure Diet Soy Tofu",
+    "seenAt": "2026-09-13"
+  },
+  "prawns": {
+    "price": 163,
+    "pack": null,
+    "name": "IFB Fresh Catch Prawns Medium",
+    "seenAt": "2026-09-13"
+  },
+  "soya chunks": {
+    "price": 34,
+    "pack": null,
+    "name": "Classic Soya Chunks by Flipkart Grocery",
+    "seenAt": "2026-09-13"
+  },
+  "oats": {
+    "price": 128,
+    "pack": null,
+    "name": "Manna Oats-High Protein & Fibre,Natural Wholegrain,Nutritious Instant Breakfast Cereal Pouch",
+    "seenAt": "2026-09-13"
+  },
+  "pasta": {
+    "price": 33,
+    "pack": null,
+    "name": "Maggi PAZZTA Instant Cheese Macaroni Pasta",
+    "seenAt": "2026-09-13"
+  },
+  "bread crumbs": {
+    "price": 334,
+    "pack": null,
+    "name": "American Garden Plain Bread Crumbs",
+    "seenAt": "2026-09-13"
+  },
+  "cocoa powder": {
+    "price": 82,
+    "pack": null,
+    "name": "Puramate Cocoa Powder",
+    "seenAt": "2026-09-13"
+  },
+  "chocolate syrup": {
+    "price": 35,
+    "pack": null,
+    "name": "Del Monte Chocolate Syrup Chocolate",
+    "seenAt": "2026-09-13"
+  },
+  "condensed milk": {
+    "price": 58,
+    "pack": null,
+    "name": "Milky Mist Sweetened Condensed Milk",
+    "seenAt": "2026-09-13"
+  },
+  "banana": {
+    "price": 23,
+    "pack": null,
+    "name": "Robusta Banana",
+    "seenAt": "2026-09-13"
+  },
+  "whole milk": {
+    "price": 33,
+    "pack": "500 ml",
+    "name": "Amul Gold Milk",
+    "seenAt": "2026-09-13"
+  },
+  "coriander powder": {
+    "price": 105,
+    "pack": "250 g",
+    "name": "MTR Dhaniya / Coriander Powder",
+    "seenAt": "2026-09-13"
+  }
+}

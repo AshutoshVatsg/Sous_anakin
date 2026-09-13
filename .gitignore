@@ -1,0 +1,19 @@
+node_modules/
+.next/
+
+# API keys. Glob, not the bare name: .env matches ONLY ".env", which left
+# .env.backup / .env.key2.bak / .env.old.bak tracked — each holding a live key.
+.env
+.env.*
+!.env.example
+
+# Scraped pages and screenshots — regenerable, and ~480 files of noise.
+cache/*
+# …but NOT the memory. These two are what the agent has learned: real Flipkart
+# prices it has seen, and ingredients it has looked up. They make a fresh clone
+# useful immediately and cost credits to rebuild.
+!cache/prices.json
+!cache/knowledge.json
+
+# Design references, not part of the product
+Ref/
