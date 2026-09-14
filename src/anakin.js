@@ -12,8 +12,17 @@ function readKey() {
   } catch { return null; }
 }
 
-const KEY = readKey();
-if (!KEY) throw new Error('ANAKIN_API_KEY not found — set it in .env at the project root');
+// Resolve the key lazily. Throwing at import time takes the whole app down at
+// BUILD time on a host where env vars arrive later — the pages never render and
+// the error blames a missing file rather than a missing setting. Fail at the call
+// instead, so the UI boots and only the call that needs a key complains.
+let _key = null;
+function KEY() {
+  if (_key) return _key;
+  _key = readKey();
+  if (!_key) throw new Error('ANAKIN_API_KEY is not set — add it in the host environment');
+  return _key;
+}
 
 const BASE = 'https://api.anakin.io';
 const CACHE = path.join(ROOT, 'cache');
@@ -36,7 +45,7 @@ async function call(endpoint, body, { cacheName, cost = 1, fresh = false } = {})
   }
   const res = await fetch(`${BASE}${endpoint}`, {
     method: 'POST',
-    headers: { 'X-API-Key': KEY, 'Content-Type': 'application/json' },
+    headers: { 'X-API-Key': KEY(), 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
   const json = await res.json();
@@ -76,7 +85,7 @@ async function scrape(url, formats = ['markdown'], opts = {}) {
 /** Connect to Anakin's cloud browser over CDP. 1 credit / 2 min. */
 async function browser({ country = 'IN', sessionName, record = false, saveSession } = {}) {
   const { chromium } = await import('playwright-core');
-  const q = new URLSearchParams({ api_key: KEY, country });
+  const q = new URLSearchParams({ api_key: KEY(), country });
   if (sessionName) q.set('session_name', sessionName);
   if (record) q.set('record', 'true');
   if (saveSession) q.set('save_session', saveSession);

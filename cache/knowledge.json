@@ -3166,5 +3166,1047 @@
     "keeps": false,
     "pack": "500 g",
     "learnedAt": "2026-09-14"
+  },
+  "fish": {
+    "retail": "fish",
+    "aliases": [
+      "machli",
+      "fresh fish"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "thumb sized piece of ginger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "fresh ginger",
+      "gingerroot"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken thighs boneless": {
+    "retail": "chicken boneless thighs",
+    "aliases": [
+      "boneless chicken thighs"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "spice paste": {
+    "retail": "ginger garlic paste",
+    "aliases": [
+      "adrak lasun paste",
+      "ginger garlic paste"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground almonds": {
+    "retail": "almond powder",
+    "aliases": [
+      "badam powder",
+      "almond meal"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "naan breads": {
+    "retail": "naan",
+    "aliases": [
+      "naan bread"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "potatoes": {
+    "retail": "potato",
+    "aliases": [
+      "aloo"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "serving suggestion serve with rice": {
+    "retail": "rice",
+    "aliases": [
+      "chawal"
+    ],
+    "keeps": true,
+    "pack": "1 kg",
+    "learnedAt": "2026-09-14"
+  },
+  "fenugreek seeds": {
+    "retail": "methi seeds",
+    "aliases": [
+      "fenugreek seeds",
+      "methi dana"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "spanish paprika": {
+    "retail": "paprika",
+    "aliases": [
+      "paprika powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken thighs": {
+    "retail": "chicken thighs",
+    "aliases": [
+      "chicken thigh pieces"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken about kg": {
+    "retail": "whole chicken",
+    "aliases": [
+      "full chicken"
+    ],
+    "keeps": false,
+    "pack": "1 kg",
+    "learnedAt": "2026-09-14"
+  },
+  "lemon halved": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "thyme": {
+    "retail": "thyme",
+    "aliases": [
+      "dried thyme",
+      "thyme leaves"
+    ],
+    "keeps": true,
+    "pack": "20 g",
+    "learnedAt": "2026-09-14"
+  },
+  "soft butter": {
+    "retail": "butter",
+    "aliases": [
+      "salted butter",
+      "unsalted butter",
+      "makhan"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "very salad potato such as charlotte": {
+    "retail": "baby potato",
+    "aliases": [
+      "salad potato",
+      "new potato"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chantenay carrot": {
+    "retail": "carrot",
+    "aliases": [
+      "gajar",
+      "baby carrot"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken stock": {
+    "retail": "chicken stock cube",
+    "aliases": [
+      "chicken stock",
+      "chicken broth cube"
+    ],
+    "keeps": true,
+    "pack": "2 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "buttermilk": {
+    "retail": "buttermilk",
+    "aliases": [
+      "chaas"
+    ],
+    "keeps": false,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken drumsticks": {
+    "retail": "chicken drumsticks",
+    "aliases": [
+      "chicken legs"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cinammon stick": {
+    "retail": "cinnamon stick",
+    "aliases": [
+      "dalchini",
+      "cassia stick"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cm cinnamon stick": {
+    "retail": "cinnamon stick",
+    "aliases": [
+      "dalchini",
+      "cassia stick"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chilli flakes": {
+    "retail": "chilli flakes",
+    "aliases": [
+      "red chilli flakes",
+      "crushed chilli"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "caster sugar": {
+    "retail": "caster sugar",
+    "aliases": [
+      "superfine sugar"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken thighs skinned": {
+    "retail": "chicken thighs",
+    "aliases": [
+      "skinless chicken thighs",
+      "chicken thigh pieces"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "one piece of ginger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "fresh ginger",
+      "gingerroot"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground cloves": {
+    "retail": "clove powder",
+    "aliases": [
+      "laung powder",
+      "ground clove"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground cardamom": {
+    "retail": "cardamom powder",
+    "aliases": [
+      "elaichi powder",
+      "ground elaichi"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "four ounce chicken breast halves on the bone": {
+    "retail": "chicken breast with bone",
+    "aliases": [
+      "bone in chicken breast"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground black pepper": {
+    "retail": "black pepper powder",
+    "aliases": [
+      "kali mirch powder",
+      "ground pepper"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground chicken": {
+    "retail": "chicken mince",
+    "aliases": [
+      "minced chicken",
+      "keema chicken",
+      "chicken keema"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "knob of butter": {
+    "retail": "butter",
+    "aliases": [
+      "salted butter",
+      "unsalted butter",
+      "makhan"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "sage leaves": {
+    "retail": "sage",
+    "aliases": [
+      "dried sage",
+      "sage leaves"
+    ],
+    "keeps": true,
+    "pack": "20 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground allspice": {
+    "retail": "allspice powder",
+    "aliases": [
+      "ground allspice"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground ginger": {
+    "retail": "ginger powder",
+    "aliases": [
+      "saunth powder",
+      "sonth powder",
+      "dry ginger powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground nutmeg": {
+    "retail": "nutmeg powder",
+    "aliases": [
+      "jaiphal powder",
+      "ground nutmeg"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "gingerroot": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "fresh ginger",
+      "gingerroot"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "dark brown sugar": {
+    "retail": "brown sugar",
+    "aliases": [
+      "dark brown sugar"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "dark rum": {
+    "retail": "dark rum",
+    "aliases": [
+      "rum"
+    ],
+    "keeps": true,
+    "pack": "180 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "soy sauce": {
+    "retail": "soy sauce",
+    "aliases": [
+      "soya sauce"
+    ],
+    "keeps": true,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "cider vinegar": {
+    "retail": "apple cider vinegar",
+    "aliases": [
+      "cider vinegar",
+      "acv"
+    ],
+    "keeps": true,
+    "pack": "500 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "whole chicken": {
+    "retail": "whole chicken",
+    "aliases": [
+      "full chicken",
+      "broiler chicken whole",
+      "curry cut whole chicken"
+    ],
+    "keeps": false,
+    "pack": "1 kg",
+    "learnedAt": "2026-09-14"
+  },
+  "peas": {
+    "retail": "matar",
+    "aliases": [
+      "green peas",
+      "hara matar",
+      "mutter"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "soya sauce": {
+    "retail": "soy sauce",
+    "aliases": [
+      "soya sauce",
+      "soy sauce"
+    ],
+    "keeps": true,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "red chilli sauce": {
+    "retail": "red chilli sauce",
+    "aliases": [
+      "red chili sauce",
+      "red chilli sauce"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "vinegar": {
+    "retail": "synthetic vinegar",
+    "aliases": [
+      "white vinegar",
+      "synthetic vinegar"
+    ],
+    "keeps": true,
+    "pack": "500 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "cornflour": {
+    "retail": "cornflour",
+    "aliases": [
+      "corn flour",
+      "corn starch",
+      "cornstarch"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "plain flour": {
+    "retail": "maida",
+    "aliases": [
+      "maida",
+      "plain flour",
+      "refined flour"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "paneer cm": {
+    "retail": "paneer",
+    "aliases": [
+      "paneer",
+      "cottage cheese"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "rice to serve": {
+    "retail": "basmati rice",
+    "aliases": [
+      "basmati chawal",
+      "rice"
+    ],
+    "keeps": true,
+    "pack": "1 kg",
+    "learnedAt": "2026-09-14"
+  },
+  "dark soy sauce": {
+    "retail": "dark soy sauce",
+    "aliases": [
+      "dark soya sauce",
+      "dark soy sauce"
+    ],
+    "keeps": true,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "chilli sauce": {
+    "retail": "green chilli sauce",
+    "aliases": [
+      "green chili sauce",
+      "green chilli sauce"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ketchup": {
+    "retail": "tomato ketchup",
+    "aliases": [
+      "ketchup",
+      "tomato ketchup",
+      "tomato sauce"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "rice vinegar": {
+    "retail": "rice vinegar",
+    "aliases": [
+      "rice vinegar"
+    ],
+    "keeps": true,
+    "pack": "150 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "ajwain carom seeds": {
+    "retail": "ajwain",
+    "aliases": [
+      "ajwain",
+      "carom seeds"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "mint pudina": {
+    "retail": "pudina",
+    "aliases": [
+      "mint leaves",
+      "pudina",
+      "mint"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cm piece ginger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "ginger"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "frozen peas": {
+    "retail": "frozen green peas",
+    "aliases": [
+      "frozen peas",
+      "frozen green peas",
+      "frozen matar"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "pack coriander": {
+    "retail": "coriander leaves",
+    "aliases": [
+      "dhania",
+      "dhania patta",
+      "coriander leaves",
+      "fresh coriander"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "naan bread roti": {
+    "retail": "naan",
+    "aliases": [
+      "naan",
+      "naan bread"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "white pepper": {
+    "retail": "white pepper powder",
+    "aliases": [
+      "safed mirch powder",
+      "white pepper"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "oz chicken thighs": {
+    "retail": "chicken thighs",
+    "aliases": [
+      "chicken thigh pieces"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "greek style yoghurt": {
+    "retail": "hung curd",
+    "aliases": [
+      "greek yogurt",
+      "greek yoghurt",
+      "strained curd"
+    ],
+    "keeps": false,
+    "pack": "400 g",
+    "learnedAt": "2026-09-14"
+  },
+  "red chillies": {
+    "retail": "red chilli",
+    "aliases": [
+      "lal mirch",
+      "red chili"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken breasts chunks": {
+    "retail": "chicken breast boneless",
+    "aliases": [
+      "boneless chicken breast",
+      "chicken breast pieces"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "madras curry powder": {
+    "retail": "curry powder",
+    "aliases": [
+      "madras curry powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "mild chilli powder": {
+    "retail": "kashmiri red chilli powder",
+    "aliases": [
+      "kashmiri chilli powder",
+      "kashmiri lal mirch powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "juice from about lime": {
+    "retail": "lime",
+    "aliases": [
+      "nimbu",
+      "kagzi nimbu"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ground fennel": {
+    "retail": "saunf powder",
+    "aliases": [
+      "fennel powder",
+      "ground fennel"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "unwaxed lemons": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu",
+      "lemon"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "organic": {
+    "retail": "organic",
+    "aliases": [
+      "organic"
+    ],
+    "keeps": false,
+    "pack": "1 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "bunch rosemary broken into sprigs": {
+    "retail": "rosemary",
+    "aliases": [
+      "fresh rosemary",
+      "rosemary sprigs"
+    ],
+    "keeps": false,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "garlic heads": {
+    "retail": "garlic",
+    "aliases": [
+      "lahsun",
+      "lehsun"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "sunflower": {
+    "retail": "sunflower oil",
+    "aliases": [
+      "sunflower refined oil",
+      "refined sunflower oil"
+    ],
+    "keeps": true,
+    "pack": "1 l",
+    "learnedAt": "2026-09-14"
+  },
+  "butter very soft": {
+    "retail": "butter",
+    "aliases": [
+      "makkhan"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "skinless chicken thighs": {
+    "retail": "chicken thighs boneless",
+    "aliases": [
+      "boneless skinless chicken thighs",
+      "chicken thigh fillets"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lemons juiced": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu",
+      "lemon"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "plain yoghurt": {
+    "retail": "curd",
+    "aliases": [
+      "dahi",
+      "plain yogurt",
+      "plain yoghurt"
+    ],
+    "keeps": false,
+    "pack": "400 g",
+    "learnedAt": "2026-09-14"
+  },
+  "piece of ginger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "all purpose flour": {
+    "retail": "maida",
+    "aliases": [
+      "refined flour",
+      "all purpose flour"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cracked black pepper": {
+    "retail": "black pepper crushed",
+    "aliases": [
+      "crushed black pepper",
+      "kali mirch crushed",
+      "cracked black pepper"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "egg white": {
+    "retail": "egg",
+    "aliases": [
+      "anda",
+      "eggs"
+    ],
+    "keeps": false,
+    "pack": "6 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "plus tablespoon rice wine": {
+    "retail": "rice wine vinegar",
+    "aliases": [
+      "rice vinegar"
+    ],
+    "keeps": true,
+    "pack": "150 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "hoisin sauce": {
+    "retail": "hoisin sauce",
+    "aliases": [
+      "hoisin"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "low sodium soy sauce": {
+    "retail": "soy sauce",
+    "aliases": [
+      "light soy sauce",
+      "low sodium soy sauce"
+    ],
+    "keeps": true,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "cashew": {
+    "retail": "cashew",
+    "aliases": [
+      "kaju",
+      "cashew nuts"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ridge gourd": {
+    "retail": "turai",
+    "aliases": [
+      "tori",
+      "ridge gourd",
+      "turai"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "mustard": {
+    "retail": "rai",
+    "aliases": [
+      "sarson",
+      "mustard seeds",
+      "rai"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chana dal": {
+    "retail": "chana dal",
+    "aliases": [
+      "split bengal gram",
+      "bengal gram dal"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "urad dal": {
+    "retail": "urad dal",
+    "aliases": [
+      "udad dal",
+      "split black gram"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "red chili": {
+    "retail": "red chilli",
+    "aliases": [
+      "lal mirch",
+      "red chili"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "sesame seeds": {
+    "retail": "til",
+    "aliases": [
+      "white sesame seeds",
+      "sesame",
+      "til"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken thigh fillets": {
+    "retail": "chicken thighs boneless",
+    "aliases": [
+      "boneless chicken thighs",
+      "skinless chicken thighs"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "korean gochugaru chilli powder": {
+    "retail": "gochugaru",
+    "aliases": [
+      "korean red pepper flakes",
+      "gochugaru chilli powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lemon wedges": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu",
+      "lemon"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "marinade": {
+    "retail": "marinade",
+    "aliases": [
+      "marinade"
+    ],
+    "keeps": false,
+    "pack": "1 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "natural yoghurt": {
+    "retail": "curd",
+    "aliases": [
+      "dahi",
+      "natural yogurt",
+      "natural yoghurt"
+    ],
+    "keeps": false,
+    "pack": "400 g",
+    "learnedAt": "2026-09-14"
+  },
+  "sweet paprika": {
+    "retail": "paprika",
+    "aliases": [
+      "sweet paprika"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "haldi powder": {
+    "retail": "haldi powder",
+    "aliases": [
+      "turmeric powder",
+      "haldi"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "gigner": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "inji",
+      "allam"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kashmiri red chilies": {
+    "retail": "kashmiri red chilli",
+    "aliases": [
+      "kashmiri lal mirch",
+      "kashmiri mirch",
+      "kashmiri whole red chilli"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kadai masala": {
+    "retail": "kadai masala",
+    "aliases": [
+      "karahi masala",
+      "kadhai masala"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "carom seeds": {
+    "retail": "ajwain",
+    "aliases": [
+      "ajwain",
+      "carom seeds",
+      "bishop s weed"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "rice flour": {
+    "retail": "rice flour",
+    "aliases": [
+      "rice flour",
+      "chawal ka atta",
+      "chawal atta",
+      "arisi"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
   }
 }

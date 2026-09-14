@@ -18,22 +18,22 @@
     "seenAt": "2026-09-13"
   },
   "garam masala": {
-    "price": 175,
-    "pack": null,
-    "name": "EVEREST Garam Masala",
-    "seenAt": "2026-09-13"
+    "price": 89,
+    "pack": "100 g",
+    "name": "Tata Sampann Garam Masala Powder",
+    "seenAt": "2026-09-14"
   },
   "ginger garlic paste": {
-    "price": 24,
-    "pack": null,
-    "name": "MOTHER'S RECIPE Ginger Garlic Paste",
-    "seenAt": "2026-09-13"
+    "price": 109,
+    "pack": "700 g",
+    "name": "MOTHER'S RECIPE Rozaana Ginger Garlic Paste",
+    "seenAt": "2026-09-14"
   },
   "butter": {
-    "price": 54,
-    "pack": null,
-    "name": "Nutralite Doodhshakti Probiotic Butter Spread",
-    "seenAt": "2026-09-13"
+    "price": 70,
+    "pack": "100 g",
+    "name": "Nandini Pasteurised Salted Butter",
+    "seenAt": "2026-09-14"
   },
   "cashews": {
     "price": 257,
@@ -54,10 +54,10 @@
     "seenAt": "2026-09-13"
   },
   "eggs": {
-    "price": 48,
-    "pack": null,
-    "name": "Delish Fresh White Eggs",
-    "seenAt": "2026-09-13"
+    "price": 80,
+    "pack": "6 Units",
+    "name": "Jaya Fresh White Eggs",
+    "seenAt": "2026-09-14"
   },
   "tofu": {
     "price": 48,
@@ -135,6 +135,54 @@
     "price": 80,
     "pack": "200 g",
     "name": "Nutraj Dhania / Coriander Seeds",
+    "seenAt": "2026-09-14"
+  },
+  "chicken": {
+    "price": 179,
+    "pack": "500 g",
+    "name": "Meatzza Frozen Fresh Chicken Curry Cut Bone In",
+    "seenAt": "2026-09-14"
+  },
+  "fish": {
+    "price": 51,
+    "pack": "80 g, Pack of 1",
+    "name": "Octorika Dry Tuna Fish Cubes",
+    "seenAt": "2026-09-14"
+  },
+  "whole chicken": {
+    "price": 179,
+    "pack": "500 g",
+    "name": "Meatzza Frozen Fresh Chicken Curry Cut Bone In",
+    "seenAt": "2026-09-14"
+  },
+  "haldi powder": {
+    "price": 46,
+    "pack": null,
+    "name": "Catch Turmeric Powder",
+    "seenAt": "2026-09-14"
+  },
+  "jeera": {
+    "price": 40,
+    "pack": null,
+    "name": "J.S. Dhanush Baan 100% Organic jeera (cumin) 100g",
+    "seenAt": "2026-09-14"
+  },
+  "green chilli": {
+    "price": 36,
+    "pack": "100 g",
+    "name": "Organic Green Chilli",
+    "seenAt": "2026-09-14"
+  },
+  "dhania powder": {
+    "price": 42,
+    "pack": null,
+    "name": "RUCHI Dhaniya / Coriander Powder",
+    "seenAt": "2026-09-14"
+  },
+  "red chilli powder": {
+    "price": 52,
+    "pack": "100 g",
+    "name": "EVEREST Hot And Red Chilli Powder",
     "seenAt": "2026-09-14"
   }
 }

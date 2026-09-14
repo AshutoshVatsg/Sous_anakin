@@ -231,17 +231,48 @@ function openBrowser(url, emit, { tries = 3, stagger = 5000 } = {}) {
 const LOGIN_URL = 'https://www.flipkart.com/account/login?ret=/';
 
 export async function connect(emit = () => {}, { landing = 'https://www.flipkart.com/' } = {}) {
+  // Reuse only a browser that is still alive AND already where we want it.
+  //
+  // A failed run leaves S.held populated. Reusing it blindly handed sign-in a dead
+  // or homepage-parked tab, which then reported "could not find the phone field on
+  // Flipkart" with only the search box on the page — a confusing way to say "this
+  // browser is not the one you think it is".
   if (S.held?.browser) {
-    emit('wire', 'reusing the open Anakin browser');
-    return S.held;
+    const alive = await S.held.page.evaluate(() => true).catch(() => false);
+    if (!alive) {
+      emit('warn', 'the held browser had died — opening a fresh one');
+      await S.held.browser.close().catch(() => {});
+      S.held = null; S.otpResolve = null;
+    } else {
+      if (S.held.landedOn !== landing) {
+        emit('wire', 'reusing the open Anakin browser');
+        await go(S.held.page, landing);
+        await settle(S.held.page);
+        S.held.landedOn = landing;
+      } else {
+        emit('wire', 'reusing the open Anakin browser');
+      }
+      return S.held;
+    }
   }
   const key = KEY();
   if (!key) throw new Error('No Anakin key — set ANAKIN_API_KEY in .env');
 
-  // save_session keeps the cookies for later, even though Flipkart will not honour
-  // them on a fresh connection — they are still useful evidence in the bug report.
+  // Do NOT pass session_name.
+  //
+  // session_name asks Anakin to RESTORE a saved jar, and on an account that has
+  // never saved one the whole tunnel 404s before it opens:
+  //   404 {"error":"session not found, not yet saved, or in use","session_name":"flipkart"}
+  // Playwright surfaces that as the useless "Target page, context or browser has
+  // been closed", which the 3-way race then reports as three separate failures.
+  //
+  // Nothing is lost by dropping it: Flipkart refuses restored cookies anyway —
+  // 14 cookies come back and the page still says "Login", 3 attempts out of 3
+  // (ANAKIN-BUG-REPORT #12). We sign in fresh every run regardless.
+  //
+  // save_session is kept: it costs nothing and creates the jar for the record.
   const url = `wss://api.anakin.io/v1/browser-connect?api_key=${key}&country=IN`
-    + `&session_name=flipkart&save_session=flipkart&save_url=https://www.flipkart.com/`;
+    + `&save_session=flipkart&save_url=https://www.flipkart.com/`;
 
   const { browser, page } = await openBrowser(url, emit);
   // Land straight on the page the caller wants. Loading the homepage first and

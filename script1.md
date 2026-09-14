@@ -2,93 +2,89 @@
 
 Recording-ready demo script for the Anakin Forge submission and social video.
 
-**Main cut:** approximately 90 seconds, around 200 spoken words. Record the actual workflow first, then record the voiceover against the footage. The timestamps below are editing targets, not claims about execution speed.
+**Main cut:** approximately 90 seconds at a conversational pace. Record the actual workflow first, then record the voiceover against the footage. The timestamps below are editing targets, not claims about execution speed. Allow up to 100 seconds if you want longer pauses on the reasoning and cart readback.
 
 **The impression we want to leave:** “They used Anakin to connect real recipe sites to a real grocery cart—and built an agent that can explain its decisions.”
 
 ## 1. The main film — 90 seconds
 
-### 0:00–0:06 · Start with the result
+### 0:00–0:13 · The problem we noticed
 
-**SHOW:** A tight crop of the actual Flipkart cart from the recorded run. Product names and quantities visible; personal details masked. No title animation before the proof.
+**SHOW:** Three quick, readable shots: a recipe's ingredient list, a cupboard check, and a grocery search. Cut to Sous on its name. No logo animation or slow introduction.
 
 **SAY:**
 
-> “This is my actual grocery cart. It started with one sentence.”
+> “We noticed something frustrating: finding a recipe is easy. Getting from that recipe to dinner is still your job—checking cupboards, comparing groceries, building a cart. So we built Sous.”
 
-**ON SCREEN:** `One craving → a real cart`
+**ON SCREEN:** `The recipe isn't the whole job.`
 
-**EDIT:** Cut back to Sous before the search. Small label: `Earlier in the same run`.
+**DELIVERY:** Sound like you're telling someone why you built it, not introducing a company. Give “So we built Sous” a small pause.
 
-### 0:06–0:18 · Make the problem personal
+### 0:13–0:23 · One request, a personal starting point
 
 **SHOW:** The dinner desk. Briefly open **My kitchen**, showing onion, tomato, oil and salt. Type `something with paneer around ₹200` and press **Find dinner**.
 
 **SAY:**
 
-> “I wanted something with paneer, around two hundred rupees. I already had a few ingredients. I didn't want another recipe to cross-check and shop for.”
+> “Tell it: ‘Something with paneer, around two hundred rupees.’ Add what you already have. Your craving, your budget, your kitchen—that's the starting point.”
 
 **ON SCREEN:** `The craving. The budget. Your kitchen.`
 
-### 0:18–0:30 · Introduce Sous through its work
+### 0:23–0:35 · Anakin opens the recipe web
 
 **SHOW:** Real search and read events in the agent's notebook, then the recipe cards arriving. Bring the notebook into the crop; don't leave it unreadably small at the edge.
 
 **SAY:**
 
-> “So we built Sous. Anakin Search and URL Scraper bring in real recipe pages. Sous compares them with my kitchen and shows me what I can make.”
+> “Anakin Search finds recipe pages. URL Scraper reads their ingredients. Sous compares them with your pantry and budget, so the shortlist is built around what you already have.”
 
 **ON SCREEN:** `BROWSE · Anakin Search + URL Scraper`
 
-### 0:30–0:44 · The moment that makes it more than search
+### 0:35–0:49 · Make the intelligence concrete
 
 **SHOW:** Hold on one card's **you have / need** coverage. Select the dish, then settle on a complete ingredient-reasoning line. Use the tomato-purée example only if it appears in this recording.
 
 **SAY:**
 
-> “Here's the important bit: I have tomatoes. This recipe needs tomato purée. Sous keeps it on the shopping list—and explains why. Every missing ingredient gets that kind of check.”
+> “Watch this: I have tomatoes, but this recipe needs tomato purée. Sous explains why it stays on the shopping list. Not just ‘buy this.’ ‘Here's why you need it.’”
 
 **ON SCREEN:** `THINK · A reason for every ingredient`
 
 **HOLD:** Leave the reason readable for at least three seconds. This is the shot people should remember.
 
-### 0:44–0:55 · Make the economics understandable
+### 0:49–1:02 · Wire turns ingredients into products
 
-**SHOW:** The plan's covered ingredients, missing items and cost breakdown. Point once at the distinction between cooking cost and buying full packs; avoid sweeping the cursor around.
-
-**SAY:**
-
-> “It separates what I own from what I need, and the cost of this meal from buying full packs. Estimates are marked. Missing information stays missing.”
-
-**ON SCREEN:** `Cost to cook ≠ first-shop cost`
-
-### 0:55–1:08 · Cross from advice into action
-
-**SHOW:** Click **Add … to Flipkart Minutes**. Show the real product/stock events and the ingredient state changing. Shorten waits with an explicit `Wait shortened` caption.
+**SHOW:** Click **Add … to Flipkart Minutes**. Crop into real product/stock events and the corresponding ingredient updates. Keep any unavailable item visible. Label shortened waits `Wait shortened`.
 
 **SAY:**
 
-> “Then Anakin Wire checks real product listings and stock. Sous adds the missing groceries through my signed-in browser, showing the choices and anything it couldn't add.”
+> “Choose a dish. Anakin Wire brings back real products, prices, and stock. Sous finds the missing groceries and adds them to my Flipkart Minutes cart through my signed-in browser.”
 
-**ON SCREEN:** `ACT · Real products. Visible outcomes.`
+**ON SCREEN:** `ACT · Anakin Wire: product data · Local browser: cart additions`
 
-### 1:08–1:21 · Prove it, then show the boundary
+### 1:02–1:14 · Show the cloud-browser capability, accurately
 
-**SHOW:** The final cart readback in Sous, followed by the matching contents on Flipkart. Keep any failed-item count visible. Do not click a payment control.
+**SHOW:** A clearly labelled cut to the **separate Cupboard flow**: staple selection → masked OTP handover → actual addition. Use its own recorded run, not a synthetic test. Retain the flow label throughout.
 
 **SAY:**
 
-> “But an Add button isn't proof. It reads the cart back. These are the actual contents, not just its shopping list. Then it stops. I review. I pay.”
+> “And in our separate Cupboard flow, Anakin's cloud browser handles sign-in and adds staples after I provide the OTP. The agent works; I control access.”
+
+**ON SCREEN:** `Separate flow · Cupboard · Anakin Browser API`
+
+### 1:14–1:30 · Evidence, control, and the closing line
+
+**SHOW:** The Cupboard cart readback followed by the matching regular Flipkart cart from that same run. If returning to the Minutes recording, explicitly label the switch. Keep failed-item counts visible. End on Sous and the repo link; never click payment.
+
+**SAY:**
+
+> “But a click isn't proof. Sous reads the cart back, shows what landed, and stops before payment. Anakin gives it access. Sous turns that access into action. You make dinner. Sous does the homework.”
 
 **ON SCREEN:** `Verified in the cart. Payment stays with you.`
 
-### 1:21–1:30 · Give people a line to remember
+**ON SCREEN:** `Read back. Check. Hand over.`
 
-**SHOW:** Return to the finished Sous workspace. End card: **Sous**, `Built with Anakin`, and the repository link.
-
-**SAY:**
-
-> “Anakin connects the web and the shop. Sous handles the work between craving and cooking. You make dinner. Sous does the homework.”
+**DELIVERY:** Slow down on “a click isn't proof.” Pause before the final two sentences. Don't rush the evidence to make room for an end card.
 
 **END CARD:**
 
@@ -116,9 +112,9 @@ Use the same real footage, edited more tightly. Keep large captions: the story m
 
 Don't squeeze the entire desktop into a vertical video. Reframe the input, coverage, reasoning and cart as separate shots. The UI is evidence, not background texture.
 
-## 3. Optional Anakin showcase — add 35–45 seconds
+## 3. Optional extended Anakin showcase
 
-For a longer judge-facing demo, insert this before the closing line. This is a **separate Cupboard flow**, not a continuation of the Minutes cart shown above.
+For a longer judge-facing demo, replace the main film's 12-second Cupboard segment with this 35–45-second version. Do not narrate both versions. This is a **separate Cupboard flow**, not a continuation of the Minutes cart shown above.
 
 **SHOW:** Navigate to **Cupboard**, select a small staple list, then show the phone-to-OTP handover. Mask the entire phone number and OTP. After verification, the current UI automatically continues stocking. Show its real readback and, if available, the matching regular Flipkart cart.
 
@@ -168,11 +164,11 @@ Keep the actual partial-success count. A small, clearly verified result is stron
 >
 > Then it verified the cart—and stopped before payment.
 >
-> Meet Sous. Built with Anakin.
+> Meet Sous. Built with @anakinHQ.
 >
 > You cook. It does the homework.
 
-Attach the real demo. Put the repository link in a reply and tag Anakin's official account after checking the correct handle. Publish the completed-cart wording only with a recording that proves it.
+Attach the real demo. The submission form supplied by the team specifies `@anakinHQ` on X; keep the tag in the post. Put the repository link in a reply. Publish the completed-cart wording only with a recording that proves it.
 
 ### Longer caption / LinkedIn / launch thread opener
 

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: sous
+    runtime: node
+    plan: free
+    region: singapore          # closest to Flipkart/Anakin's India exits
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: false          # deploy when you say so, not on every push
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: ANAKIN_API_KEY
+        sync: false            # set in the Render dashboard, never in git
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false
