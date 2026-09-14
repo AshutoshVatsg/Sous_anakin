@@ -24,8 +24,8 @@ function wireKey() {
 
 const KEY = wireKey();
 const CATALOG = 'flipkart-com';
-// list_products needs a pid/lid anchor even though it returns the surrounding catalogue.
-const ANCHOR = { product_id: 'FFWH32SZNFU8YB6F', listing_id: 'LSTFFWH32SZNFU8YB6FM6QZLT' };
+// The rebuilt actions take a plain search_query — the old pid/lid ANCHOR hack is gone.
+const A = (n) => `act_flipkart_com_minutes_${n}`;
 
 // Every Wire action is 1 credit. Counted here so the UI can show the spend as it
 // happens — on a 300-credit account, what an agent costs is part of what it is.
@@ -62,11 +62,11 @@ export async function check() {
   const r = await fetch(`https://api.anakin.io/v1/wire/catalog/${CATALOG}`, { headers: { 'X-API-Key': KEY } });
   const d = await r.json();
   const actions = (d.actions || []).map((a) => a.action_id);
-  return { count: actions.length, actions, ok: actions.includes('act_flipkart_com_list_products') };
+  return { count: actions.length, actions, ok: actions.includes(A('list_products')) };
 }
 
 export const setAddress = (pincode = '560102', extra = {}) =>
-  run('act_flipkart_com_set_delivery_address', {
+  run(A('set_delivery_address'), {
     pincode, city: 'Bengaluru', state: 'Karnataka',
     address_line1: '1024, 7th Sector, 20th Cross Road, HSR Layout', ...extra,
   });
@@ -75,23 +75,38 @@ export const setAddress = (pincode = '560102', extra = {}) =>
  * Real Minutes products for a term — name, price, and crucially available_quantity.
  * Returns them ranked, in-stock first, so the caller can act on genuine stock.
  */
-export async function products(term) {
-  const d = await run('act_flipkart_com_list_products', {
-    ...ANCHOR,
-    page_uri: `/search?q=${encodeURIComponent(term)}&marketplace=HYPERLOCAL`,
-  });
+export async function products(term, { pincode = '560102' } = {}) {
+  const d = await run(A('list_products'), { search_query: term, pincode });
   const all = d.products || [];
   const words = term.toLowerCase().split(/\s+/).filter((w) => w.length > 2);
   const scored = all.map((p) => ({
     ...p,
+    // in_stock is a HINT, not a gate.
+    //
+    // The rebuilt action reports available_quantity as the PACK SIZE ("200 g")
+    // rather than a count, and its in_stock boolean has false negatives: it
+    // reported 0 of 37 paneer listings in stock while paneer was demonstrably
+    // addable by hand. Gating on it rejected every real paneer, sent the agent
+    // off to the "cottage cheese" alias, and left it arguing with spice mixes.
+    //
+    // So keep every candidate and only let stock decide the ORDER — try the ones
+    // Flipkart admits to first. The cart readback is the source of truth about
+    // whether something was really bought; a listing flag never is.
+    pack: p.pack_size || (typeof p.available_quantity === 'string' ? p.available_quantity : null),
+    available_quantity: 1,
+    inStock: Boolean(p.in_stock),
     _hits: words.filter((w) => (p.product_name || '').toLowerCase().includes(w)).length,
-    inStock: p.available_quantity > 0,
   }));
   const relevant = scored.filter((p) => p._hits > 0 || !words.length);
   const pool = relevant.length ? relevant : scored;
   return pool.sort((a, b) => b.inStock - a.inStock || b._hits - a._hits || a.price - b.price);
 }
 
-export const viewCart = () => run('act_flipkart_com_view_cart', ANCHOR);
-export const addToCart = (product_id, listing_id, quantity = 1) =>
-  run('act_flipkart_com_add_to_cart', { product_id, listing_id, quantity });
+export const viewCart = (pincode = '560102') => run(A('view_cart'), { pincode });
+
+// NOTE: the rebuilt catalogue has no add_to_cart. Wire finds and stock-checks the
+// product; the browser performs the add. Kept as an explicit failure rather than a
+// silent absence so callers don't think they wrote to a cart.
+export const addToCart = () => {
+  throw new Error('act_flipkart_com_minutes_add_to_cart was not built - the browser performs the add');
+};

@@ -34,11 +34,22 @@ export async function readCart(p) {
   await p.waitForTimeout(5000);
 
   // switch to the Minutes tab if it isn't already showing
+  // Switch to Minutes whenever that tab exists and isn't already showing.
+  //
+  // The old condition was `!empty || !hasMinutesTab`, which is true the moment the
+  // FLIPKART tab holds anything — so with one parcel item in the cart it never
+  // switched, read the wrong tab, and reported an empty Minutes basket while the
+  // groceries sat one click away.
   try {
-    const onMinutes = await p.evaluate(() =>
-      !/Your cart is empty/i.test(document.body.innerText || '') ||
-      !/Minutes\/Grocery/i.test(document.body.innerText || ''));
-    if (!onMinutes) {
+    const need = await p.evaluate(() => {
+      const t = document.body.innerText || '';
+      const m = t.match(/Minutes\/Grocery \((\d+)\)/i);
+      if (!m) return false;                       // single-tab layout
+      // The active tab's rows are what innerText shows below the tab strip. If the
+      // Minutes count is non-zero but no row is rendered, we're on the other tab.
+      return Number(m[1]) > 0;
+    });
+    if (need) {
       await p.getByText(/Minutes\/Grocery/i).first().click({ timeout: 8000 });
       await p.waitForTimeout(4000);
     }
@@ -92,21 +103,36 @@ function scrapeCart(p) {
       /^(Expiry|Deal|Qty|Save|Remove|Buy|Free|Apply|View|Continue|Shop|Total|MRP|Discount|Cart|Flipkart|Minutes)/i.test(s) ||
       /^\d+$/.test(s) || s.length < 4;
 
+    // Anchor on the PACK line, not on the price.
+    //
+    // This used to demand name/pack/price on three consecutive lines. Flipkart now
+    // renders rating, vote count and a discount badge between the pack and the
+    // price — "EVEREST Garam Masala / 100 g / 4.5 / • / (902) / 2% / Rs272 / Rs266"
+    // — so the triple never matched, every row was skipped, and a cart holding
+    // items read as empty. That made every successful add look like a failure.
+    //
+    // The pack line is the reliable anchor: the name sits immediately above it, and
+    // the price is the LAST rupee figure in the few lines below (struck-through MRP
+    // comes first, the payable price second).
     const items = [];
     const seen = new Set();
-    for (let i = 2; i < rows.length; i++) {
-      const priced = isPrice(rows[i]), gone = isGone(rows[i]);
-      if (!priced && !gone) continue;
-      const pack = rows[i - 1], name = rows[i - 2];
-      if (!isPack(pack) || isNoise(name)) continue;          // require a real <name>/<pack>/₹ triple
+    for (let i = 1; i < rows.length; i++) {
+      if (!isPack(rows[i])) continue;
+      const name = rows[i - 1];
+      if (isNoise(name)) continue;
+
+      let price = null, gone = false;
+      for (let j = i + 1; j < Math.min(i + 8, rows.length); j++) {
+        if (isPack(rows[j])) break;                  // ran into the next row
+        if (isGone(rows[j])) { gone = true; break; }
+        if (isPrice(rows[j])) price = Number(rows[j].replace(/[^\d]/g, ''));
+      }
+      if (price === null && !gone) continue;         // not a cart row at all
+
       const key = name.toLowerCase();
       if (seen.has(key)) continue;
       seen.add(key);
-      items.push({
-        name, pack,
-        price: priced ? Number(rows[i].replace(/[^\d]/g, '')) : null,
-        outOfStock: gone,
-      });
+      items.push({ name, pack: rows[i], price, outOfStock: gone });
     }
 
     return {
@@ -132,31 +158,72 @@ async function settle(p, tries = 12) {
   return last;
 }
 
-/** Find the card matching a product name and click its Add — by identity, not index. */
+/**
+ * Find the card matching a product name and click its Add — by identity, not index.
+ *
+ * Two things this has to survive, both measured on the live Minutes page:
+ *
+ * 1. ~120 Add buttons for ~8 distinct products. They are carousel duplicates and
+ *    they ALL report the same y coordinate, stacked on top of each other. Picking
+ *    any element whose text is "Add" grabs an ancestor wrapping several cards, and
+ *    the click then lands on whatever happens to be on top — which is how "ginger"
+ *    matched at score 1.0, clicked, and never reached the cart.
+ *    Fix: keep only the INNERMOST Add elements (ones containing no further Add).
+ *
+ * 2. Coordinates measured before a scroll has painted point off-screen, and a click
+ *    at y=963 in a 900px viewport silently does nothing. Fix: scroll first, let it
+ *    paint, then re-measure in a second evaluate. Same approach as AIM() in
+ *    cloudcart.js, which is what made the cloud-browser path reliable.
+ */
 async function clickCardFor(p, productName) {
+  // Measure and click WITHOUT moving the page.
+  //
+  // scrollIntoView looked like the right fix and was the regression. The Minutes
+  // grid lazy-loads: one scroll took the Add-button count from 20 to 22, React
+  // replaced the card, and the element we had just measured no longer existed when
+  // the click landed. Playwright's own .click() auto-scrolls, so it failed the same
+  // way. Four ancestor levels, raw mouse and .click() all missed for the same reason.
+  //
+  // So: only consider cards already on screen, and take the coordinates in the same
+  // evaluate that chooses them. settle() has already waited for the grid to stop
+  // changing, which is what makes that safe.
   const spot = await p.evaluate((target) => {
     const vis = (e) => e.offsetParent !== null;
     const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w.length > 2);
     const want = norm(target);
+    const isAdd = (e) => /^add$/i.test((e.innerText || '').trim());
+
+    // Innermost Add elements only. There are ~120 on a Minutes results page and
+    // most are ancestors wrapping several cards.
+    const adds = [...document.querySelectorAll('button,a,span,div')]
+      .filter((e) => vis(e) && isAdd(e))
+      .filter((e) => ![...e.querySelectorAll('*')].some(isAdd));
+
     let best = null, bestScore = 0;
-    [...document.querySelectorAll('button,div,span,a')]
-      .filter((e) => vis(e) && /^add$/i.test((e.innerText || '').trim()))
-      .forEach((a) => {
-        let c = a; for (let k = 0; k < 6 && c.parentElement; k++) c = c.parentElement;
+    for (const a of adds) {
+      const r = a.getBoundingClientRect();
+      if (r.top < 60 || r.top > window.innerHeight - 60) continue;   // on screen already
+      // Climb until the card's own text shows up. Levels 1-5 are just "Add", 6-7
+      // the price pair; the product name only appears around level 8.
+      let c = a, sc = 0, label = '';
+      for (let k = 0; k < 10 && c.parentElement; k++) {
+        c = c.parentElement;
         const txt = (c.innerText || '').replace(/\s+/g, ' ');
-        const r = a.getBoundingClientRect();
-        if (r.top < 60 || r.top > window.innerHeight - 60) return;
+        if (txt.length > 200) break;          // climbed past the card into the grid
         const have = norm(txt);
-        const s = want.filter((w) => have.includes(w)).length / (want.length || 1);
-        if (s > bestScore) {
-          bestScore = s;
-          best = { x: r.x + r.width / 2, y: r.y + r.height / 2, label: txt.slice(0, 60), score: s };
-        }
-      });
-    return best;
+        const s2 = want.filter((w) => have.includes(w)).length / (want.length || 1);
+        if (s2 > sc) { sc = s2; label = txt.slice(0, 60); }
+      }
+      if (sc > bestScore) {
+        bestScore = sc;
+        best = { x: r.x + r.width / 2, y: r.y + r.height / 2, label, score: sc };
+      }
+    }
+    return best && bestScore >= 0.4 ? best : null;
   }, productName);
 
-  if (!spot || spot.score < 0.4) return { clicked: false, why: 'no matching card on screen' };
+  if (!spot) return { clicked: false, why: 'no matching card on screen' };
+
   await p.mouse.move(spot.x, spot.y);
   await p.waitForTimeout(220);
   await p.mouse.down(); await p.waitForTimeout(100); await p.mouse.up();

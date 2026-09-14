@@ -2297,5 +2297,874 @@
     "keeps": true,
     "pack": "200 ml",
     "learnedAt": "2026-09-13"
+  },
+  "bone in skinless chicken": {
+    "retail": "chicken curry cut",
+    "aliases": [
+      "curry cut chicken",
+      "skinless chicken curry cut",
+      "bone in skinless chicken"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "white poppy seeds": {
+    "retail": "khus khus",
+    "aliases": [
+      "khuskhus",
+      "white poppy seeds",
+      "posto"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "peeled": {
+    "retail": "peeled garlic",
+    "aliases": [
+      "lasun peeled",
+      "peeled garlic cloves"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "tamarind pulp": {
+    "retail": "tamarind pulp",
+    "aliases": [
+      "imli pulp",
+      "imli paste",
+      "tamarind paste"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "bone in skinless chicken legs with thighs": {
+    "retail": "chicken leg quarters",
+    "aliases": [
+      "leg quarters",
+      "chicken full leg",
+      "bone in skinless leg quarters"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cafreal paste": {
+    "retail": "cafreal masala",
+    "aliases": [
+      "cafreal paste",
+      "cafreal masala paste",
+      "goan cafreal masala"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "solid ghee": {
+    "retail": "ghee",
+    "aliases": [
+      "desi ghee",
+      "cow ghee",
+      "clarified butter"
+    ],
+    "keeps": true,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken breasts": {
+    "retail": "chicken breast boneless",
+    "aliases": [
+      "boneless chicken breast",
+      "breast fillet"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "amchur": {
+    "retail": "amchur powder",
+    "aliases": [
+      "amchoor",
+      "dry mango powder",
+      "aamchur"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "boneless skinless chicken thighs": {
+    "retail": "chicken thigh boneless",
+    "aliases": [
+      "boneless chicken thighs",
+      "skinless chicken thigh fillet"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "thick yoghurt": {
+    "retail": "curd",
+    "aliases": [
+      "dahi",
+      "yoghurt",
+      "yogurt",
+      "thick curd"
+    ],
+    "keeps": false,
+    "pack": "400 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lime juice from one lime": {
+    "retail": "lime",
+    "aliases": [
+      "nimbu",
+      "kagzi nimbu",
+      "lime"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "chicken leg quarters about pounds total skinned": {
+    "retail": "chicken leg quarters",
+    "aliases": [
+      "leg quarters",
+      "chicken full leg",
+      "skinned chicken leg quarters"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cloves garlic": {
+    "retail": "garlic",
+    "aliases": [
+      "lahsun",
+      "lasun",
+      "garlic"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kashmiri chillis": {
+    "retail": "kashmiri dry red chilli",
+    "aliases": [
+      "kashmiri chilli",
+      "kashmiri red chilli whole",
+      "dry kashmiri chilli"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "corriander seeds": {
+    "retail": "dhania seeds",
+    "aliases": [
+      "coriander seeds",
+      "sabut dhania",
+      "dhaniya seeds"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "fenugreek seed": {
+    "retail": "methi seeds",
+    "aliases": [
+      "fenugreek seeds",
+      "methi dana",
+      "methi seeds"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "juice of lime": {
+    "retail": "lime",
+    "aliases": [
+      "nimbu",
+      "kagzi nimbu",
+      "lime"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "cardamoms": {
+    "retail": "green cardamom",
+    "aliases": [
+      "elaichi",
+      "hari elaichi",
+      "cardamom"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "peppercorns": {
+    "retail": "black pepper whole",
+    "aliases": [
+      "black peppercorns",
+      "kali mirch whole",
+      "sabut kali mirch"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "bone in": {
+    "retail": "chicken curry cut",
+    "aliases": [
+      "curry cut chicken",
+      "bone in chicken"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "white": {
+    "retail": "white poppy seeds",
+    "aliases": [
+      "khus khus",
+      "khuskhus",
+      "posto"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "head of garlic": {
+    "retail": "garlic",
+    "aliases": [
+      "lahsun",
+      "lasun",
+      "garlic bulb"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "piece ginger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "fresh ginger"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "green chile": {
+    "retail": "green chilli",
+    "aliases": [
+      "hari mirch",
+      "green chili",
+      "green chile"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lime": {
+    "retail": "lime",
+    "aliases": [
+      "nimbu",
+      "kagzi nimbu"
+    ],
+    "keeps": false,
+    "pack": "4 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "ground cinnamon": {
+    "retail": "dalchini powder",
+    "aliases": [
+      "cinnamon powder",
+      "ground dalchini"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "russet potatoes": {
+    "retail": "potato",
+    "aliases": [
+      "aloo",
+      "batata",
+      "potatoes"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "boneless": {
+    "retail": "boneless chicken",
+    "aliases": [
+      "chicken boneless",
+      "boneless chicken curry cut"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lemon": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu",
+      "yellow lemon"
+    ],
+    "keeps": false,
+    "pack": "2 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "parsley leaves": {
+    "retail": "parsley",
+    "aliases": [
+      "parsley leaves",
+      "ajmoda leaves"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "boneless chicken": {
+    "retail": "boneless chicken",
+    "aliases": [
+      "chicken boneless",
+      "boneless chicken curry cut"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kashmiri red chili": {
+    "retail": "kashmiri red chilli powder",
+    "aliases": [
+      "kashmiri chilli powder",
+      "kashmiri lal mirch powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "capsicums": {
+    "retail": "capsicum",
+    "aliases": [
+      "shimla mirch",
+      "bell pepper",
+      "capsicums"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "black pepper corn": {
+    "retail": "black pepper whole",
+    "aliases": [
+      "black peppercorns",
+      "kali mirch whole",
+      "sabut kali mirch"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "low sodium chicken broth": {
+    "retail": "chicken stock",
+    "aliases": [
+      "chicken broth",
+      "stock"
+    ],
+    "keeps": true,
+    "pack": "500 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "freshly squeezed lemon juice": {
+    "retail": "lemon",
+    "aliases": [
+      "nimbu",
+      "yellow lemon"
+    ],
+    "keeps": false,
+    "pack": "2 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "cornstarch": {
+    "retail": "corn flour",
+    "aliases": [
+      "cornflour",
+      "corn starch",
+      "white corn flour"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "chat masala": {
+    "retail": "chaat masala",
+    "aliases": [
+      "chat masala"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "smoked paprika": {
+    "retail": "smoked paprika",
+    "aliases": [
+      "paprika smoked"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "mint": {
+    "retail": "mint leaves",
+    "aliases": [
+      "pudina",
+      "mint"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "black pepper ground": {
+    "retail": "black pepper powder",
+    "aliases": [
+      "ground black pepper",
+      "kali mirch powder",
+      "black pepper ground",
+      "pepper powder",
+      "black pepper powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "garlic powder": {
+    "retail": "garlic powder",
+    "aliases": [
+      "lahsun powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ginger powder": {
+    "retail": "saunth powder",
+    "aliases": [
+      "sonth powder",
+      "dry ginger powder",
+      "ginger powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "poha powder": {
+    "retail": "poha",
+    "aliases": [
+      "flattened rice",
+      "aval",
+      "atukulu"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "shallots": {
+    "retail": "shallots",
+    "aliases": [
+      "sambar onion",
+      "small onion",
+      "madras onion"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "white vinegar": {
+    "retail": "white vinegar",
+    "aliases": [
+      "synthetic vinegar"
+    ],
+    "keeps": true,
+    "pack": "500 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "cinnanmon": {
+    "retail": "dalchini",
+    "aliases": [
+      "cinnamon",
+      "cinnanmon"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "ginnger": {
+    "retail": "ginger",
+    "aliases": [
+      "adrak",
+      "ginnger"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "badam": {
+    "retail": "badam",
+    "aliases": [
+      "almonds",
+      "badam"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "few kesar": {
+    "retail": "kesar",
+    "aliases": [
+      "saffron",
+      "zafran",
+      "few kesar"
+    ],
+    "keeps": true,
+    "pack": "1 g",
+    "learnedAt": "2026-09-14"
+  },
+  "corn flour": {
+    "retail": "corn flour",
+    "aliases": [
+      "cornflour",
+      "makai starch"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "pepper powder": {
+    "retail": "black pepper powder",
+    "aliases": [
+      "ground black pepper",
+      "kali mirch powder",
+      "black pepper ground",
+      "pepper powder",
+      "black pepper powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "black pepper powder": {
+    "retail": "black pepper powder",
+    "aliases": [
+      "ground black pepper",
+      "kali mirch powder",
+      "black pepper ground",
+      "pepper powder",
+      "black pepper powder"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "maggi masala ae magic": {
+    "retail": "maggi masala ae magic",
+    "aliases": [
+      "maggi magic masala",
+      "masala ae magic"
+    ],
+    "keeps": true,
+    "pack": "6 sachet",
+    "learnedAt": "2026-09-14"
+  },
+  "palak": {
+    "retail": "palak",
+    "aliases": [
+      "spinach",
+      "palak leaves"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "rapini": {
+    "retail": "broccoli rabe",
+    "aliases": [
+      "rapini"
+    ],
+    "keeps": false,
+    "pack": "250 g",
+    "learnedAt": "2026-09-14"
+  },
+  "frozen collard greens": {
+    "retail": "frozen collard greens",
+    "aliases": [
+      "collard greens frozen"
+    ],
+    "keeps": false,
+    "pack": "300 g",
+    "learnedAt": "2026-09-14"
+  },
+  "can sarson ka saag": {
+    "retail": "sarson ka saag",
+    "aliases": [
+      "mustard saag",
+      "mustard greens curry"
+    ],
+    "keeps": true,
+    "pack": "450 g",
+    "learnedAt": "2026-09-14"
+  },
+  "toasted chickpea flour": {
+    "retail": "sattu",
+    "aliases": [
+      "roasted chana flour",
+      "sattu atta"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "dry red chiles": {
+    "retail": "sabut lal mirch",
+    "aliases": [
+      "dry red chilli",
+      "dried red chilli",
+      "whole dry red chilli",
+      "whole red chilli"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "jalapeno": {
+    "retail": "jalapeno",
+    "aliases": [
+      "jalape o"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "paprika": {
+    "retail": "paprika",
+    "aliases": [
+      "paprika powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "knorr caldo de tomate bouillon": {
+    "retail": "tomato bouillon",
+    "aliases": [
+      "caldo de tomate",
+      "tomato bouillon cubes",
+      "tomato seasoning cubes"
+    ],
+    "keeps": true,
+    "pack": "8 cubes",
+    "learnedAt": "2026-09-14"
+  },
+  "block paneer": {
+    "retail": "paneer",
+    "aliases": [
+      "malai paneer",
+      "paneer block"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "roasted peanut": {
+    "retail": "roasted peanuts",
+    "aliases": [
+      "bhuni moongfali",
+      "moongfali roasted",
+      "peanut roasted"
+    ],
+    "keeps": true,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "sesame": {
+    "retail": "til",
+    "aliases": [
+      "sesame seeds",
+      "white til",
+      "safed til"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "low fat cream": {
+    "retail": "low fat cream",
+    "aliases": [
+      "light cream"
+    ],
+    "keeps": false,
+    "pack": "200 ml",
+    "learnedAt": "2026-09-14"
+  },
+  "kasuri methi leaves": {
+    "retail": "kasuri methi",
+    "aliases": [
+      "kasoori methi",
+      "dried methi leaves",
+      "dry fenugreek leaves"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "diamond crystal": {
+    "retail": "rock salt",
+    "aliases": [
+      "sendha namak",
+      "halite salt"
+    ],
+    "keeps": true,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
+  },
+  "red chiles": {
+    "retail": "lal mirch",
+    "aliases": [
+      "red chilli",
+      "red chilies",
+      "red chillies"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kashmiri": {
+    "retail": "kashmiri lal mirch powder",
+    "aliases": [
+      "kashmiri chilli powder",
+      "kashmiri mirch powder"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "roti": {
+    "retail": "roti",
+    "aliases": [
+      "chapati",
+      "phulka"
+    ],
+    "keeps": false,
+    "pack": "10 pc",
+    "learnedAt": "2026-09-14"
+  },
+  "red chilles": {
+    "retail": "lal mirch",
+    "aliases": [
+      "red chilli",
+      "red chilies",
+      "red chillies"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "cinnamon piece": {
+    "retail": "dalchini",
+    "aliases": [
+      "cinnamon stick",
+      "dalchini stick"
+    ],
+    "keeps": true,
+    "pack": "50 g",
+    "learnedAt": "2026-09-14"
+  },
+  "thick curd whisked": {
+    "retail": "curd",
+    "aliases": [
+      "dahi",
+      "thick curd"
+    ],
+    "keeps": false,
+    "pack": "400 g",
+    "learnedAt": "2026-09-14"
+  },
+  "kasoor methi": {
+    "retail": "kasuri methi",
+    "aliases": [
+      "kasoori methi",
+      "dried methi leaves",
+      "dry fenugreek leaves"
+    ],
+    "keeps": true,
+    "pack": "25 g",
+    "learnedAt": "2026-09-14"
+  },
+  "basmati rice": {
+    "retail": "basmati rice",
+    "aliases": [
+      "long grain basmati rice"
+    ],
+    "keeps": true,
+    "pack": "1 kg",
+    "learnedAt": "2026-09-14"
+  },
+  "garlic pods": {
+    "retail": "garlic",
+    "aliases": [
+      "lahsun",
+      "garlic cloves"
+    ],
+    "keeps": false,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "dry red chillies": {
+    "retail": "sabut lal mirch",
+    "aliases": [
+      "dry red chilli",
+      "dried red chilli",
+      "whole dry red chilli",
+      "whole red chilli"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "curry powder": {
+    "retail": "curry powder",
+    "aliases": [
+      "curry masala"
+    ],
+    "keeps": true,
+    "pack": "100 g",
+    "learnedAt": "2026-09-14"
+  },
+  "lbs paneer": {
+    "retail": "paneer",
+    "aliases": [
+      "malai paneer",
+      "paneer block"
+    ],
+    "keeps": false,
+    "pack": "200 g",
+    "learnedAt": "2026-09-14"
+  },
+  "onion": {
+    "retail": "onion",
+    "aliases": [
+      "pyaz",
+      "pyaaz",
+      "kanda"
+    ],
+    "keeps": false,
+    "pack": "500 g",
+    "learnedAt": "2026-09-14"
   }
 }

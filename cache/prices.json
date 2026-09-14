@@ -1,9 +1,9 @@
 {
   "paneer": {
-    "price": 84,
-    "pack": null,
-    "name": "Gowardhan Block Paneer",
-    "seenAt": "2026-09-13"
+    "price": 101,
+    "pack": "200 g",
+    "name": "Amul Malai Paneer",
+    "seenAt": "2026-09-14"
   },
   "kasuri methi": {
     "price": 14,
@@ -130,5 +130,11 @@
     "pack": "250 g",
     "name": "MTR Dhaniya / Coriander Powder",
     "seenAt": "2026-09-13"
+  },
+  "coriander": {
+    "price": 80,
+    "pack": "200 g",
+    "name": "Nutraj Dhania / Coriander Seeds",
+    "seenAt": "2026-09-14"
   }
 }
