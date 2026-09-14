@@ -14,15 +14,19 @@ Sous — from "I'm hungry" to a filled grocery cart
 
 ## Project Description
 
-Eating out every day in a city like Bangalore or Mumbai stopped being a lifestyle choice and became a budget decision. So people cook. And then cooking at home collapses into the same three dishes, so you go looking for something new — YouTube, a food blog, a reel someone sent you.
+Eating out every day in a city like Bangalore or Mumbai stopped being a lifestyle choice and became a budget decision. So people cook — and cooking at home collapses into the same three dishes, so you go looking for something new: YouTube, a food blog, a reel someone sent you.
 
-Half an hour later you have five tabs open and still don't know whether you can actually make any of it, because not one of those pages knows what's already in your kitchen. You end up cross-referencing a recipe against your own shelves in your head, item by item, and usually giving up and ordering in.
+Half an hour later you have five tabs open and still can't tell whether you can make any of it, because not one of those pages knows what's already in your kitchen. So you cross-reference a recipe against your own shelves in your head, item by item, and usually give up and order in.
 
-**That's the real cost. Not the cooking — the searching.** Working out what's for you and what isn't, with what you already have. And it's the same half hour whether you're cooking to save money, eating to a protein number for the gym, or just want to make the Kerala soya roast from a blog with four hundred readers.
+**That's the real cost. Not the cooking — the searching.** Working out what's for you and what isn't, with what you already have.
+
+And it compounds the moment you ask anything more of your food. Someone training needs **100g of protein, under ₹600, out of what's already in the kitchen** — three constraints at once, and nothing online handles more than one of them. Recipe sites don't know your budget. Nutrition apps count macros but won't shop. Grocery apps have no idea what a dish needs. So you do the join by hand, every single day, until you give up and eat the same boiled eggs and chicken forever.
+
+**Eating to a number shouldn't mean eating the same thing.** Neither should eating on a budget. And if what you actually want is the Kerala soya roast off a blog with four hundred readers, that should take one sentence — not an afternoon.
 
 Sous does that search for you.
 
-Say what you feel like — *"something with paneer around ₹200"*, *"100g protein under ₹600"* — and tick what's in your kitchen. It reads the live web across 8–10 different angles and pulls ~16 real recipe pages in parallel, independent blogs included, not a fixed catalogue. It comes back with five genuinely different dishes, ranked by how much of each you **already own** — with the cost to cook, the time, and a "you have 7 of 22" bar on every card. Shakes, one-pan dinners, regional dishes nobody's app has heard of: if a blog published it properly, it's in range.
+Say what you feel like — *"something with paneer around ₹200"*, *"100g protein under ₹600"* — and tick what's in your kitchen. It reads the live web across 8–10 different angles and pulls ~16 real recipe pages in parallel, independent blogs included, not a fixed catalogue. Five genuinely different dishes come back — different dishes, different styles, different sites — ranked by how much of each you **already own**, each showing the cost to cook, the time, the protein per serving, and a "you have 7 of 22" bar. Shakes, one-pan dinners, regional dishes nobody's app has heard of: if a blog published it properly, it's in range.
 
 Pick one and it works out what you're genuinely missing — your chilli powder doesn't cover green chillies, a ground spice blend doesn't cover a whole bay leaf, fresh tomato isn't tomato purée. It scales to how many you're feeding, rounds up to real pack sizes, sources every item as a live Flipkart product with a real price and real stock, and fills the cart — proving each add by reading the cart back rather than trusting its own click.
 
