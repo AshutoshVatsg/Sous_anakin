@@ -14,7 +14,7 @@ Sous — from "I'm hungry" to a filled grocery cart
 
 ## Project Description
 
-Five tabs open, a recipe on each, and you still can't tell whether you can make any of them — because not one of those pages knows what's in your kitchen. So you cross-reference against your own shelves in your head, item by item, and order in anyway.
+Five tabs open, a recipe on each, and you still can't tell whether you can make any of them — because not one of those pages knows what's in your kitchen. So you cross-reference against your own shelves in your head, item by item, and order in anyway. In big cities , people prefer to make something on their own to cut down costs ; but this somehow also cuts their food taste.
 
 That's the cost. Not the cooking. **The searching.**
 
@@ -30,9 +30,9 @@ Pick one and the reasoning starts. Your chilli powder doesn't cover green chilli
 
 Then it shops. Every item becomes a live Flipkart product with a real price and real stock, added to your cart and **proved by reading the cart back** — never by trusting its own click. On a real run it asked for one garam masala, Flipkart quietly enforced a minimum of two, and the agent caught it.
 
-None of this has an API. Recipes live on independent food blogs; prices and stock live behind a retailer's own site. **Anakin is what made both reachable** — Search and URL Scraper for the web, Wire for live Flipkart product data, and four custom Flipkart Minutes actions its team built for us mid-hackathon.
+None of this has an API. Recipes live on independent food blogs; prices and stock live behind a retailer's own site. **Anakin is what made both reachable** — Search and URL Scraper for the web, Wire for live Flipkart product data, and four custom Flipkart Minutes actions.
 
-Then it stops. You open Flipkart and pay. The agent never pays, and never could.
+Then it stops. You open Flipkart and pay.
 
 ---
 

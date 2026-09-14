@@ -217,6 +217,7 @@ actions synchronously.
 | | |
 |---|---|
 | **[DETAILS.md](DETAILS.md)** | The full write-up — variety, budget, protein, the brain, every bug we fixed |
+| [DEMO-SCRIPT.md](DEMO-SCRIPT.md) | The demo script — what to show, what to say, in what order |
 | [DEMO-RUNBOOK.md](DEMO-RUNBOOK.md) | The verified end-to-end run, with timings |
 | [ANAKIN-BUG-REPORT.md](ANAKIN-BUG-REPORT.md) | 15 issues found while building |
 | [MINUTES-WIRE.md](MINUTES-WIRE.md) | The four Build Studio actions and their real responses |

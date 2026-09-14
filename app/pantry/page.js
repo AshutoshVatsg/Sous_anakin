@@ -1,74 +1,77 @@
-'use client';
-import { useState, useEffect } from 'react';
+"use client";
+import { useEffect, useId, useRef, useState } from "react";
+import { streamPost } from "../lib/stream";
+import { Icon } from "../components/icons";
+import {
+  Navigation,
+  Masthead,
+  Sheet,
+  ActivityFeed,
+  ErrorNotice,
+} from "../components/workspace";
 
-/* ---------------------------------------------------------------- data */
-
-/**
- * The cupboard, not the fridge.
- *
- * These are the things `src/price.js` classifies as `keeps` — bought once every
- * few weeks, good for months, and nobody needs them in ten minutes. That's exactly
- * why this page can run entirely through Anakin: the urgency that forces the
- * cooking flow into your own logged-in browser isn't here.
- */
 const SHELVES = [
   {
-    name: 'Oils & fats',
-    items: ['ghee', 'sunflower oil', 'mustard oil', 'groundnut oil'],
+    name: "Oils & fats",
+    note: "The beginning of a good meal",
+    items: ["ghee", "sunflower oil", "mustard oil", "groundnut oil"],
   },
   {
-    name: 'Everyday masalas',
-    items: ['garam masala', 'red chilli powder', 'turmeric powder', 'coriander powder',
-            'cumin powder', 'chaat masala', 'sambar powder'],
+    name: "Everyday masalas",
+    note: "A little warmth, a lot of flavour",
+    items: [
+      "garam masala",
+      "red chilli powder",
+      "turmeric powder",
+      "coriander powder",
+      "cumin powder",
+      "chaat masala",
+      "sambar powder",
+    ],
   },
   {
-    name: 'Whole spices',
-    items: ['jeera', 'mustard seeds', 'bay leaf', 'cinnamon stick', 'cloves', 'cardamom', 'hing'],
+    name: "Whole spices",
+    note: "Small things. Big difference.",
+    items: [
+      "jeera",
+      "mustard seeds",
+      "bay leaf",
+      "cinnamon stick",
+      "cloves",
+      "cardamom",
+      "hing",
+    ],
   },
   {
-    name: 'Flours & grains',
-    items: ['atta', 'maida', 'besan', 'suji', 'basmati rice', 'poha'],
+    name: "Flours & grains",
+    note: "Something to bring it together",
+    items: ["atta", "maida", "besan", "suji", "basmati rice", "poha"],
   },
   {
-    name: 'Dals & pulses',
-    items: ['toor dal', 'moong dal', 'chana dal', 'urad dal', 'rajma', 'chickpeas'],
+    name: "Dals & pulses",
+    note: "Comfort, always in the cupboard",
+    items: [
+      "toor dal",
+      "moong dal",
+      "chana dal",
+      "urad dal",
+      "rajma",
+      "chickpeas",
+    ],
   },
   {
-    name: 'Jars & sauces',
-    items: ['tomato puree', 'soy sauce', 'vinegar', 'kasuri methi', 'ginger garlic paste', 'sugar'],
+    name: "Jars & sauces",
+    note: "The finishing touches",
+    items: [
+      "tomato puree",
+      "soy sauce",
+      "vinegar",
+      "kasuri methi",
+      "ginger garlic paste",
+      "sugar",
+    ],
   },
 ];
-
-const MARK = {
-  wire: '◆', addr: '⌖', option: '·', reject: '✕', think: '✳',
-  check: '✓', item: '▸', warn: '!', error: '✕', start: '▸', done: '★',
-};
-const TONE = {
-  wire: 'text-saffron', check: 'text-fresh', reject: 'text-ink-3',
-  error: 'text-stop', warn: 'text-warn', think: 'text-saffron', done: 'text-fresh',
-};
-
-async function streamPost(url, body, onEvent) {
-  const res = await fetch(url, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
-  });
-  const reader = res.body.getReader();
-  const dec = new TextDecoder();
-  let buf = '';
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buf += dec.decode(value, { stream: true });
-    const parts = buf.split('\n\n');
-    buf = parts.pop();
-    for (const p of parts) {
-      if (!p.startsWith('data: ')) continue;
-      try { onEvent(JSON.parse(p.slice(6))); } catch { /* partial frame */ }
-    }
-  }
-}
-
-/* ---------------------------------------------------------------- page */
 
 export default function Pantry() {
   const [picked, setPicked] = useState([]);
@@ -78,265 +81,574 @@ export default function Pantry() {
   const [summary, setSummary] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-
-  // Flipkart won't honour a restored session, so the cloud browser signs in once
-  // and stays open for the whole run. That's what these three bits of state track.
-  const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState('');
-  const [auth, setAuth] = useState({ connected: false, signedIn: false, awaitingOtp: false });
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpSending, setOtpSending] = useState(false);
+  const [auth, setAuth] = useState({
+    connected: false,
+    signedIn: false,
+    awaitingOtp: false,
+  });
+  const [sheet, setSheet] = useState(null);
+  const [phase, setPhase] = useState(null);
+  const contentRef = useRef(null);
+  const lock = useRef(false);
 
   useEffect(() => {
-    fetch('/api/pantry/signin').then((r) => r.json()).then(setAuth).catch(() => {});
+    fetch("/api/pantry/signin")
+      .then((response) => response.json())
+      .then(setAuth)
+      .catch(() => {});
   }, []);
-
-  const toggle = (it) =>
-    setPicked((p) => (p.includes(it) ? p.filter((x) => x !== it) : [...p, it]));
+  useEffect(() => {
+    if (auth.awaitingOtp || summary)
+      contentRef.current?.scrollTo({ top: 0, behavior: "instant" });
+  }, [auth.awaitingOtp, summary]);
+  const toggle = (item) =>
+    setPicked((previous) =>
+      previous.includes(item)
+        ? previous.filter((value) => value !== item)
+        : [...previous, item],
+    );
 
   async function startSignIn() {
-    if (!/^\d{10}$/.test(phone) || busy) return;
-    setBusy(true); setError(null); setEvents([]); setItemState({}); setCredits(0); setSummary(null);
-    let ok = false;
+    if (!/^\d{10}$/.test(phone) || lock.current || !picked.length) return;
+    lock.current = true;
+    setBusy(true);
+    setPhase("finding");
+    setError(null);
+    setEvents([]);
+    setItemState({});
+    setCredits(0);
+    setSummary(null);
+    let signedIn = false;
     try {
-      // The picked items travel with the phone number on purpose: the agent
-      // searches and decides while the OTP is in flight, so the short-lived
-      // browser session is spent clicking rather than thinking.
-      await streamPost('/api/pantry/signin', { phone, items: picked }, (ev) => {
-        if (typeof ev.credits === 'number') setCredits(ev.credits);
-        if (ev.type === 'done') ok = Boolean(ev.data && ev.data.signedIn);
-        if (ev.type === 'otp') setAuth((a) => ({ ...a, awaitingOtp: true, connected: true }));
-        if (ev.type === 'done') setAuth({ ...ev.data, awaitingOtp: false });
-        if (ev.type === 'error') setError(ev.message);
-        setEvents((prev) => [...prev, ev]);
-      });
-    } catch (e) { setError(String(e.message)); }
-    setBusy(false);
-
-    // The stream's own verdict is not the last word. signIn() has thrown
-    // "OTP submitted but Flipkart still shows a login screen" at a browser that was
-    // genuinely signed in — the redirect simply landed a second after the poll gave
-    // up. So ask the live page before deciding, or a good session gets abandoned.
-    const live = await fetch('/api/pantry/signin').then((r) => r.json()).catch(() => null);
+      // Preserve the existing overlap: shelf research runs while the user enters the OTP.
+      await streamPost(
+        "/api/pantry/signin",
+        { phone, items: picked },
+        (event) => {
+          if (typeof event.credits === "number") setCredits(event.credits);
+          if (event.type === "done") signedIn = Boolean(event.data?.signedIn);
+          if (event.type === "otp") {
+            setAuth((previous) => ({
+              ...previous,
+              awaitingOtp: true,
+              connected: true,
+            }));
+            setSheet("signin");
+          }
+          if (event.type === "done") {
+            setAuth({ ...event.data, awaitingOtp: false });
+            setSheet(null);
+          }
+          if (event.type === "error") setError(event.message);
+          setEvents((previous) => [...previous, event]);
+        },
+      );
+    } catch (failure) {
+      setError(failure.message);
+    }
+    const live = await fetch("/api/pantry/signin")
+      .then((response) => response.json())
+      .catch(() => null);
     if (live) setAuth(live);
-
-    // Don't make the human press a second button. The session is measured in
-    // seconds and it is already running.
-    if ((ok || live?.signedIn) && picked.length) stockUp({ keepLog: true });
+    lock.current = false;
+    if ((signedIn || live?.signedIn) && picked.length) {
+      setSheet(null);
+      await stockUp({ keepLog: true });
+    } else {
+      setBusy(false);
+      setPhase(null);
+    }
   }
 
   async function sendOtp() {
-    const r = await fetch('/api/pantry/signin', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ otp }),
-    });
-    if (!r.ok) setError('That code was not accepted — is the sign-in still waiting?');
-    setOtp('');
+    if (otpSending || otp.length < 4) return;
+    setOtpSending(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/pantry/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ otp }),
+      });
+      if (!response.ok)
+        throw new Error(
+          "That code was not accepted. Check the code and try again while the session is open.",
+        );
+      setOtp("");
+    } catch (failure) {
+      setError(failure.message);
+    } finally {
+      setOtpSending(false);
+    }
   }
 
   async function stockUp({ keepLog = false } = {}) {
-    if (!picked.length) return;
-    setBusy(true); setError(null); setSummary(null);
-    if (!keepLog) { setEvents([]); setItemState({}); setCredits(0); }
+    if (!picked.length || lock.current) return;
+    lock.current = true;
+    setBusy(true);
+    setPhase("filling");
+    setError(null);
+    setSummary(null);
+    if (!keepLog) {
+      setEvents([]);
+      setItemState({});
+      setCredits(0);
+    }
     try {
-      await streamPost('/api/pantry', { items: picked }, (ev) => {
-        if (typeof ev.credits === 'number') setCredits(ev.credits);
-        if (ev.type === 'item' && ev.data?.name) {
-          setItemState((s) => ({ ...s, [ev.data.name]: ev.data }));
-        } else if (ev.type === 'done') {
-          setSummary(ev.data);
-        } else if (ev.type === 'error') {
-          setError(ev.message);
-        }
-        setEvents((prev) => [...prev, ev]);
+      await streamPost("/api/pantry", { items: picked }, (event) => {
+        if (typeof event.credits === "number") setCredits(event.credits);
+        if (event.type === "item" && event.data?.name)
+          setItemState((previous) => ({
+            ...previous,
+            [event.data.name]: event.data,
+          }));
+        else if (event.type === "done") setSummary(event.data);
+        else if (event.type === "error") setError(event.message);
+        setEvents((previous) => [...previous, event]);
       });
-    } catch (e) { setError(String(e.message)); }
-    setBusy(false);
+    } catch (failure) {
+      setError(failure.message);
+    } finally {
+      setBusy(false);
+      setPhase(null);
+      lock.current = false;
+    }
   }
 
-  const done = Object.values(itemState).filter((s) => s.state === 'added').length;
+  const done = Object.values(itemState).filter((item) =>
+    ["added", "already"].includes(item.state),
+  ).length;
+  const signIn = (
+    <SignIn
+      phone={phone}
+      setPhone={setPhone}
+      otp={otp}
+      setOtp={setOtp}
+      auth={auth}
+      busy={busy}
+      sending={otpSending}
+      hasItems={!!picked.length}
+      onSignIn={startSignIn}
+      onOtp={sendOtp}
+    />
+  );
+  const selection = (
+    <section className="selected-panel">
+      <header>
+        <h2>Your cupboard list</h2>
+        <span>{picked.length} selected</span>
+      </header>
+      {picked.length ? (
+        <div className="selection-tags">
+          {picked.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      ) : (
+        <p className="small-note">
+          Pick the staples you&apos;re running low on.
+        </p>
+      )}
+      {summary && (
+        <a
+          className="button button-primary full-width"
+          href="https://www.flipkart.com/viewcart"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {summary.added} of {summary.asked} added
+          <Icon name="external" size={15} />
+        </a>
+      )}
+      <p className="small-note">
+        Added to your regular Flipkart cart. You review the packs, final prices,
+        and delivery.
+      </p>
+    </section>
+  );
 
   return (
-    <div className="mx-auto max-w-[1180px] px-5 py-7 lg:px-8">
-      <header className="flex flex-wrap items-start justify-between gap-4">
-        <div className="min-w-0">
-          <a href="/" className="text-[12px] text-ink-3 underline decoration-rule underline-offset-2 hover:text-fresh">
-            ← cooking
-          </a>
-          <h1 className="mt-1 text-[26px] font-semibold leading-tight tracking-tight">Stock the cupboard</h1>
-          <p className="mt-1 max-w-2xl text-[13px] leading-snug text-ink-2">
-            Ghee, masalas, flour, dal — the things you buy once a month and never need
-            in ten minutes. This fills your <strong className="font-semibold text-ink">real
-            flipkart.com cart</strong>, entirely through Anakin: Wire finds the listings,
-            and Anakin&apos;s own cloud browser does the clicking. Nothing runs on your machine —
-            no local Chrome, no debug port.
-          </p>
+    <div className="app-shell">
+      <a className="skip-link" href="#cupboard-content">
+        Skip to cupboard
+      </a>
+      <Navigation
+        active="pantry"
+        busy={busy}
+        onActivity={() => setSheet("activity")}
+        onBasket={() => setSheet("selection")}
+        basketCount={done}
+      />
+      <div className="app-body">
+        <Masthead active="pantry">
+          <span className="quiet-promise">
+            <Icon name="shield" size={15} />
+            You always make the final call.
+          </span>
+        </Masthead>
+        <div className="workspace-grid">
+          <main className="cooking-workspace" id="cupboard-content">
+            <div className="workspace-scroll" ref={contentRef}>
+              <section className="cupboard-heading">
+                <div>
+                  <span className="eyebrow">FOR THE MEALS STILL TO COME</span>
+                  <h1>
+                    A well-stocked
+                    <br />
+                    <em>kind of kitchen.</em>
+                  </h1>
+                  <p>
+                    The ghee, the good masala, the bag of dal. Pick what&apos;s
+                    running low and I&apos;ll find the rest.
+                  </p>
+                </div>
+                <div className="cupboard-stamp" aria-hidden="true">
+                  <span>THE EVERYDAY</span>
+                  <Icon name="jar" />
+                  <span>ESSENTIALS</span>
+                </div>
+              </section>
+              <ErrorNotice message={error} />
+              {summary && (
+                <section className="pantry-result" role="status">
+                  <h2>
+                    <Icon name="shield" />
+                    {summary.added} of {summary.asked} added to your cart.
+                  </h2>
+                  <p>
+                    {summary.cart
+                      ? "Cart readback received. Review the contents below and confirm final prices on Flipkart."
+                      : "Cart readback was unavailable. The additions above were reported by the agent; confirm the actual contents on Flipkart before paying."}
+                  </p>
+                  {summary.cart && (
+                    <div className="pantry-readback">
+                      <h3>Read back from your cart</h3>
+                      {summary.cart.items?.length ? (
+                        <ul>
+                          {summary.cart.items.map((item, index) => (
+                            <li key={`${item.name}-${index}`}>
+                              <span>{item.name}</span>
+                              <span>
+                                {item.price > 0
+                                  ? `₹${item.price}`
+                                  : "Price not available"}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>
+                          No cart items were returned. Check Flipkart before
+                          relying on the reported additions.
+                        </p>
+                      )}
+                      <p>
+                        Delivery charges and the final total are confirmed at
+                        checkout.
+                      </p>
+                    </div>
+                  )}
+                  <a
+                    className="button button-primary"
+                    href="https://www.flipkart.com/viewcart"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Review your Flipkart cart
+                    <Icon name="external" size={16} />
+                  </a>
+                </section>
+              )}
+              <div className="mobile-signin">{signIn}</div>
+              <div className="section-heading shelf-intro">
+                <h2>What&apos;s missing from the shelf?</h2>
+                <span>
+                  {picked.length
+                    ? `${picked.length} selected`
+                    : "A few staples go a long way"}
+                </span>
+              </div>
+              <fieldset className="shelf-selection" disabled={busy}>
+                <legend className="sr-only">Choose cupboard staples</legend>
+                {SHELVES.map((shelf, index) => (
+                  <section className="shelf" key={shelf.name}>
+                    <div className="shelf-label">
+                      <span>0{index + 1}</span>
+                      <div>
+                        <h3>{shelf.name}</h3>
+                        <p>{shelf.note}</p>
+                      </div>
+                    </div>
+                    <div className="ingredient-chips">
+                      {shelf.items.map((item) => (
+                        <button
+                          key={item}
+                          className={`ingredient-chip ${picked.includes(item) ? "is-selected" : ""}`}
+                          aria-pressed={picked.includes(item)}
+                          onClick={() => toggle(item)}
+                        >
+                          <Icon
+                            name={picked.includes(item) ? "check" : "plus"}
+                            size={13}
+                          />
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </fieldset>
+              <p className="cupboard-footnote">
+                <Icon name="pantry" size={18} />
+                This is your cupboard shop, through regular Flipkart. For
+                tonight&apos;s fresh ingredients, head back to Cook.
+              </p>
+              {Object.keys(itemState).length > 0 && (
+                <section className="pantry-item-results">
+                  <h2>Every item, accounted for.</h2>
+                  {Object.entries(itemState).map(([name, item]) => (
+                    <article
+                      key={name}
+                      className={`pantry-item ${item.state === "failed" ? "is-failed" : ["added", "already"].includes(item.state) ? "is-added" : ""}`}
+                    >
+                      <strong>
+                        <Icon
+                          name={
+                            item.state === "failed"
+                              ? "alert"
+                              : ["added", "already"].includes(item.state)
+                                ? "check"
+                                : "search"
+                          }
+                          size={16}
+                        />
+                        {name}
+                      </strong>
+                      <p>
+                        {item.state === "working"
+                          ? "Checking the shelf…"
+                          : item.state === "failed"
+                            ? `Unavailable: ${item.why || "No suitable match was found."}`
+                            : `${item.state === "already" ? "Already in the cart" : item.substituted ? "Alternative added" : "Added"}${item.product ? ` · ${item.product}` : ""}${item.pack ? ` · ${item.pack}` : ""}${item.priceUnknown || item.price == null ? " · Price not available" : ` · ₹${item.price}`}`}
+                      </p>
+                    </article>
+                  ))}
+                </section>
+              )}
+            </div>
+            <div className="composer-wrap pantry-composer">
+              <div>
+                <strong>
+                  {busy
+                    ? `${done} of ${picked.length} in the cart`
+                    : `${picked.length} ${picked.length === 1 ? "staple" : "staples"} on your list`}
+                </strong>
+                <p>
+                  {auth.awaitingOtp
+                    ? "Your sign-in is waiting for a code."
+                    : busy
+                      ? "Every choice is recorded in the notebook."
+                      : "Stock checked. Cart verified. You pay."}
+                </p>
+              </div>
+              <button
+                className={`button ${auth.awaitingOtp ? "button-action" : "button-primary"}`}
+                disabled={!picked.length || (busy && !auth.awaitingOtp)}
+                onClick={() =>
+                  auth.awaitingOtp || !auth.signedIn
+                    ? setSheet("signin")
+                    : stockUp()
+                }
+              >
+                {auth.awaitingOtp
+                  ? "Enter your code"
+                  : busy
+                    ? "Working…"
+                    : auth.signedIn
+                      ? "Stock my cupboard"
+                      : "Continue"}
+                <Icon name="arrow" size={16} />
+              </button>
+            </div>
+          </main>
+          <aside className="workspace-aside pantry-aside">
+            {signIn}
+            <ActivityFeed
+              events={events}
+              busy={busy}
+              phase={phase}
+              credits={credits}
+            />
+          </aside>
         </div>
+      </div>
+      <Sheet
+        open={sheet === "signin"}
+        onClose={() => setSheet(null)}
+        title={
+          auth.awaitingOtp
+            ? "One quick kitchen handover."
+            : "Connect your Flipkart account"
+        }
+      >
+        {signIn}
+        <ErrorNotice message={error} />
+      </Sheet>
+      <Sheet
+        open={sheet === "activity"}
+        onClose={() => setSheet(null)}
+        title="Live activity"
+        className="activity-sheet"
+      >
+        <ActivityFeed
+          events={events}
+          busy={busy}
+          phase={phase}
+          credits={credits}
+        />
+      </Sheet>
+      <Sheet
+        open={sheet === "selection"}
+        onClose={() => setSheet(null)}
+        title="Your cupboard list"
+      >
+        {selection}
+      </Sheet>
+    </div>
+  );
+}
 
-        <div className="panel shrink-0 px-4 py-3 text-right">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-ink-3">Anakin credits</div>
-          <div className={`text-[26px] font-semibold leading-tight ${credits ? 'text-saffron' : 'text-ink-3'}`}>
-            {credits}
-          </div>
-          <div className="text-[10.5px] text-ink-3">Wire search · cloud browser</div>
+function SignIn({
+  phone,
+  setPhone,
+  otp,
+  setOtp,
+  auth,
+  busy,
+  sending,
+  hasItems,
+  onSignIn,
+  onOtp,
+}) {
+  const id = useId();
+  return (
+    <section className={`signin-panel ${auth.awaitingOtp ? "otp-panel" : ""}`}>
+      <header className="signin-heading">
+        <span>
+          <Icon name={auth.signedIn ? "shield" : "phone"} size={19} />
+        </span>
+        <div>
+          <span className="eyebrow">
+            {auth.signedIn
+              ? "CONNECTED TO FLIPKART"
+              : auth.awaitingOtp
+                ? "YOUR SESSION IS OPEN"
+                : "A QUICK HANDOVER"}
+          </span>
+          <h2>
+            {auth.signedIn
+              ? "Ready when you are."
+              : auth.awaitingOtp
+                ? "Your phone. Your permission."
+                : "Let’s connect your cart."}
+          </h2>
         </div>
       </header>
-
-      <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_360px]">
-        {/* ---------------- the shelves ---------------- */}
-        <div className="space-y-4">
-          {SHELVES.map((shelf) => (
-            <section key={shelf.name} className="panel p-4">
-              <h2 className="mb-2.5 text-[11px] font-semibold uppercase tracking-wider text-ink-3">
-                {shelf.name}
-              </h2>
-              <div className="flex flex-wrap gap-1.5">
-                {shelf.items.map((it) => {
-                  const s = itemState[it];
-                  const landed = s?.state === 'added';
-                  const failed = s?.state === 'failed';
-                  const working = s?.state === 'working';
-                  return (
-                    <button key={it} onClick={() => !busy && toggle(it)} disabled={busy}
-                      data-on={picked.includes(it)}
-                      title={s?.product || s?.why || ''}
-                      className={`chip px-2.5 py-1 text-[12.5px] disabled:cursor-default
-                        ${landed ? 'line-through opacity-60' : ''}
-                        ${failed ? 'opacity-50 line-through' : ''}`}>
-                      {working && <span className="mr-1 text-saffron">⋯</span>}
-                      {landed && <span className="mr-1 text-fresh">✓</span>}
-                      {failed && <span className="mr-1 text-stop">✕</span>}
-                      {it}
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-          ))}
-
-          <p className="px-1 text-[11.5px] leading-relaxed text-ink-3">
-            <strong className="font-semibold text-ink-2">Two Flipkart catalogues, and they are not the same.</strong>{' '}
-            The cooking flow uses <code className="text-[11px]">flipkart-com</code> — Minutes, ten-minute
-            delivery, custom Build Studio actions that are <code className="text-[11px]">auth_mode: none</code>{' '}
-            and only reach an <em>anonymous</em> cart. That is why it drives your own browser.
-            Cupboard stock isn&apos;t urgent, so this page uses{' '}
-            <code className="text-[11px]">flipkart</code> instead, where{' '}
-            <code className="text-[11px]">fk_add_to_cart</code> is{' '}
-            <code className="text-[11px]">auth_mode: required</code> and lands in the cart you actually
-            check out from. It needs a Flipkart identity connected in the Anakin dashboard once —
-            after that, no browser is involved at all.
+      {auth.awaitingOtp ? (
+        <>
+          <p>
+            Enter the code sent to{" "}
+            {phone ? `••••••${phone.slice(-4)}` : "your phone"}. I&apos;ll
+            continue with your selected groceries.
           </p>
-        </div>
-
-        {/* ---------------- run it ---------------- */}
-        <aside className="space-y-4">
-          {/* Sign-in has to happen here and stay open: Flipkart rejects a restored
-              session, so the browser that signs in must be the one that clicks. */}
-          <div className="panel p-4">
-            <div className="flex items-baseline justify-between">
-              <span className="text-[13px] font-semibold">Anakin browser</span>
-              <span className={`text-[11.5px] ${auth.signedIn ? 'text-fresh' : 'text-ink-3'}`}>
-                {auth.signedIn ? '✓ signed in' : auth.awaitingOtp ? 'waiting for OTP' : 'not signed in'}
-              </span>
-            </div>
-
-            {!auth.signedIn && !auth.awaitingOtp && (
-              <>
-                <p className="mt-1 text-[11.5px] leading-snug text-ink-3">
-                  Flipkart won&apos;t honour a saved session, so sign in once and the browser
-                  stays open for the whole run.
-                </p>
-                <div className="mt-2 flex gap-2">
-                  <input value={phone} onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                    placeholder="10-digit Flipkart number" inputMode="numeric"
-                    className="min-w-0 flex-1 rounded-xl border border-rule bg-sunk px-3 py-2 text-[13px]
-                               outline-none placeholder:text-ink-3 focus:border-fresh focus:bg-surface" />
-                  <button onClick={startSignIn} disabled={phone.length !== 10 || busy}
-                    className="shrink-0 rounded-xl bg-fresh px-4 py-2 text-[13px] font-semibold text-white
-                               transition hover:bg-fresh-2 disabled:opacity-40">
-                    {busy ? '…' : 'Sign in'}
-                  </button>
-                </div>
-              </>
-            )}
-
-            {auth.awaitingOtp && (
-              <>
-                <p className="mt-1 text-[11.5px] leading-snug text-saffron">
-                  Flipkart has sent a code to {phone || 'your phone'}.
-                </p>
-                <div className="mt-2 flex gap-2">
-                  <input value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 8))}
-                    placeholder="OTP" inputMode="numeric" autoFocus
-                    onKeyDown={(e) => e.key === 'Enter' && otp.length >= 4 && sendOtp()}
-                    className="min-w-0 flex-1 rounded-xl border border-saffron bg-surface px-3 py-2 text-[13px]
-                               tracking-[0.3em] outline-none" />
-                  <button onClick={sendOtp} disabled={otp.length < 4}
-                    className="shrink-0 rounded-xl bg-saffron px-4 py-2 text-[13px] font-semibold text-white
-                               transition hover:bg-saffron-2 disabled:opacity-40">
-                    Enter
-                  </button>
-                </div>
-              </>
-            )}
-
-            {auth.signedIn && (
-              <p className="mt-1 text-[11.5px] leading-snug text-ink-3">
-                Signed in inside Anakin&apos;s browser. Nothing is running on your machine.
-              </p>
-            )}
-          </div>
-
-          <div className="panel p-4">
-            <div className="flex items-baseline justify-between">
-              <span className="text-[13px] font-semibold">
-                {picked.length} selected
-              </span>
-              {done > 0 && <span className="text-[12px] text-fresh">{done} in the cart</span>}
-            </div>
-            <p className="mt-1 text-[11.5px] leading-snug text-ink-3">
-              {picked.length
-                ? `${picked.length * 2} credits of fk_search_products, plus the open browser at 1 credit / 2 min.`
-                : 'Pick what you’re out of.'}
-            </p>
-            <button onClick={stockUp} disabled={!picked.length || busy || !auth.signedIn}
-              className="mt-3 w-full rounded-xl bg-saffron px-4 py-3 text-[14px] font-semibold text-white
-                         shadow-sm transition hover:bg-saffron-2 disabled:opacity-40">
-              {busy ? `Stocking… ${done}/${picked.length}`
-                    : auth.signedIn ? 'Stock up via Anakin' : 'Sign in first'}
+          <span className="session-live">
+            <i />A live sign-in is waiting. Keep this page open.
+          </span>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              onOtp();
+            }}
+          >
+            <label htmlFor={`otp-${id}`}>Flipkart verification code</label>
+            <input
+              id={`otp-${id}`}
+              className="otp-input"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              value={otp}
+              maxLength={8}
+              placeholder="· · · · · ·"
+              onChange={(event) =>
+                setOtp(event.target.value.replace(/\D/g, "").slice(0, 8))
+              }
+              disabled={sending}
+            />
+            <button
+              className="button button-action full-width"
+              type="submit"
+              disabled={otp.length < 4 || sending}
+            >
+              {sending ? "Sending code…" : "Verify & continue"}
+              <Icon name="arrow" size={16} />
             </button>
-            {summary && (
-              <a href="https://www.flipkart.com/viewcart" target="_blank" rel="noreferrer"
-                className="mt-2 block rounded-xl bg-fresh px-4 py-3 text-center text-[13.5px] font-semibold text-white transition hover:bg-fresh-2">
-                {summary.added} of {summary.asked} added · open cart →
-              </a>
-            )}
-            {error && (
-              <p className="mt-3 rounded-xl border border-stop/25 bg-stop/5 px-3 py-2 text-[12px] text-stop">{error}</p>
-            )}
-          </div>
-
-          <div className="panel flex max-h-[62vh] flex-col overflow-hidden">
-            <div className="flex items-center justify-between border-b border-rule-soft px-4 py-3">
-              <h3 className="text-[13px] font-semibold">Every Wire call</h3>
-              {busy && <span className="flex items-center gap-1.5 text-[11px] text-fresh">
-                <span className="live-dot h-1.5 w-1.5 rounded-full bg-fresh" />live</span>}
+          </form>
+          <p className="small-note">
+            The sign-in is short-lived. No payment will be made.
+          </p>
+        </>
+      ) : auth.signedIn ? (
+        <p>
+          Your account is connected for this session. I&apos;ll find your
+          staples and check the actual cart after adding them.
+        </p>
+      ) : (
+        <>
+          <p>
+            Your selected groceries go into your own Flipkart cart. Sign in with
+            your phone to get started.
+          </p>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              onSignIn();
+            }}
+          >
+            <label htmlFor={`phone-${id}`}>Flipkart phone number</label>
+            <div className="phone-field">
+              <span>+91</span>
+              <input
+                id={`phone-${id}`}
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel-national"
+                value={phone}
+                placeholder="10-digit mobile number"
+                onChange={(event) =>
+                  setPhone(event.target.value.replace(/\D/g, "").slice(0, 10))
+                }
+                disabled={busy}
+              />
             </div>
-            <div className="scroll-quiet flex-1 overflow-y-auto px-4 py-3 font-mono text-[11.5px] leading-relaxed">
-              {!events.length && (
-                <p className="py-6 text-center font-sans text-ink-3">
-                  Each line below is one billed Anakin action.
-                </p>
-              )}
-              {events.map((e, i) => (
-                <div key={i} className="rise flex gap-2">
-                  <span className="w-8 shrink-0 text-right text-ink-3">{e.t}s</span>
-                  <span className={`w-3 shrink-0 ${TONE[e.type] || 'text-ink-3'}`}>{MARK[e.type] || '▸'}</span>
-                  <span className={`min-w-0 break-words ${TONE[e.type] || 'text-ink-2'}`}>{e.message}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
+            <button
+              className="button button-primary full-width"
+              disabled={phone.length !== 10 || busy || !hasItems}
+              type="submit"
+            >
+              {busy ? "Opening your sign-in…" : "Send verification code"}
+              <Icon name="arrow" size={16} />
+            </button>
+          </form>
+          <p className="small-note">
+            {!hasItems
+              ? "Select your staples first, then sign in."
+              : "After verification, I’ll start adding your selected staples."}
+          </p>
+        </>
+      )}
+    </section>
   );
 }
