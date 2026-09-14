@@ -17,3 +17,6 @@ cache/*
 
 # Design references, not part of the product
 Ref/
+
+# Internal prep — ours, not the judges'
+DEMO-SCRIPT.md
