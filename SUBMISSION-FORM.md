@@ -71,11 +71,31 @@ act_flipkart_com_view_cart              independent verification
 
 The key discovery, documented nowhere: **Flipkart Minutes is `marketplace=HYPERLOCAL`, not `GROCERY`.**
 
-### 5. Browser API — the act
+### 5. Browser API — performing the act
 
-A cloud Chrome over CDP signs into Flipkart and performs the add on the product Wire selected, then reads the cart back as proof. Nothing runs on the user's machine — the browsing, the reasoning and the acting are all remote.
+**Wire selects, the browser acts.** Wire resolves each ingredient to an exact listing — `product_id`, `listing_id`, live price, and on Minutes live stock — and the add is then performed against that precise product. Two flows, two browsers:
 
-We also use it honestly: Wire's own `fk_add_to_cart` is `auth_mode: required` and we could not make it work (`save_session` never persists an authenticated cookie jar — issues #12–13 in our bug report), so **Wire chooses the product and the Browser API performs the click.** Both halves are Anakin.
+- **Cupboard restock (`/pantry`) — Anakin's Browser API.** A cloud Chrome over CDP signs into Flipkart, adds each product Wire selected, and reads the cart back as proof. Nothing runs on the user's machine: the browsing, the reasoning and the acting are all remote. A verified run: Wire returned 10 garam masalas, the model picked one ("plain garam masala; simplest direct match over whole/sabut variants"), the cloud browser added it in 8.9s, and the readback confirmed it — including catching that Flipkart had silently enforced `Minimum Order Quantity: 2`.
+- **Cooking flow (`/`) — the user's own Flipkart Minutes session**, driven by a Chrome extension, so their login never leaves their machine.
+
+Either way, the add is never trusted. Every one is proved by reading the cart back — **a click is never evidence.**
+
+### Why Wire isn't doing the write yet, and exactly what closes it
+
+**`act_flipkart_com_add_to_cart` works.** We have run it and it returns `present_in_cart: true`. The blocker is auth, not capability.
+
+Because the four Minutes actions were built `auth_mode: none`, they operate on an **anonymous** cart — perfect for checking stock, but not the cart a person opens and pays from. And Wire's other route, `fk_add_to_cart` on the main `flipkart` catalogue, is `auth_mode: required` and fails at HTTP 400 because `save_session` never persists an authenticated cookie jar (issues #12–13 in our bug report — we passed the OTP fine; the credential always replays a logged-out session).
+
+**The fix is known and costed:** register a Flipkart identity with `auth_mode: login` against the Minutes subdomain (`flipkart-minutes` / `flipkart-com`) through Build Studio. Anakin quoted that login-capable rebuild at **5,000 credits** — out of reach on a 300-credit free tier during a one-week hackathon, entirely routine in production.
+
+The moment that credential exists, **the browser disappears completely**:
+
+```
+set_delivery_address → list_products → add_to_cart → view_cart
+4 credits per ingredient · no login flow · no session ceiling · no extension
+```
+
+That is the whole agent, end to end, as four Wire calls. The architecture is already built around it — Wire is the write path, the browser is scaffolding, and we are one credential away from removing the scaffolding.
 
 ### Zero Touch
 
