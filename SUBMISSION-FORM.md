@@ -14,21 +14,23 @@ Sous — from "I'm hungry" to a filled grocery cart
 
 ## Project Description
 
-Eating out every day in a city like Bangalore or Mumbai stopped being a lifestyle choice and became a budget decision. So people cook — and cooking at home collapses into the same three dishes, so you go looking for something new: YouTube, a food blog, a reel someone sent you.
+Five tabs open, a recipe on each, and you still can't tell whether you can make any of them — because not one of those pages knows what's in your kitchen. So you cross-reference against your own shelves in your head, item by item, and order in anyway.
 
-Half an hour later you have five tabs open and still can't tell whether you can make any of it, because not one of those pages knows what's already in your kitchen. So you cross-reference a recipe against your own shelves in your head, item by item, and usually give up and order in.
+That's the cost. Not the cooking. **The searching.**
 
-**That's the real cost. Not the cooking — the searching.** Working out what's for you and what isn't, with what you already have.
+And it compounds the moment you ask anything more of your food. Someone training needs **100g of protein, under ₹600, out of what's already in the kitchen** — three constraints at once, and nothing online handles more than one. Recipe sites don't know your budget. Nutrition apps count macros but won't shop. Grocery apps have no idea what a dish needs. Nobody joins them up, so you do it by hand, every day, until you give up and live on boiled eggs and chicken. **Eating to a number shouldn't mean eating the same thing.**
 
-And it compounds the moment you ask anything more of your food. Someone training needs **100g of protein, under ₹600, out of what's already in the kitchen** — three constraints at once, and nothing online handles more than one of them. Recipe sites don't know your budget. Nutrition apps count macros but won't shop. Grocery apps have no idea what a dish needs. So you do the join by hand, every single day, until you give up and eat the same boiled eggs and chicken forever.
+**Sous is the join.**
 
-**Eating to a number shouldn't mean eating the same thing.** Neither should eating on a budget. And if what you actually want is the Kerala soya roast off a blog with four hundred readers, that should take one sentence — not an afternoon.
+Say what you feel like — *"something with paneer around ₹200"*, *"100g protein under ₹600"* — and tick what's in your kitchen.
 
-Sous does that search for you.
+It reads the live web across 8–10 angles and pulls ~16 real recipe pages in parallel — independent blogs included, not a fixed catalogue. Five genuinely different dishes come back, ranked by how much of each you **already own**, with the cost to cook, the time, the protein per serving, and a "you have 7 of 22" bar.
 
-Say what you feel like — *"something with paneer around ₹200"*, *"100g protein under ₹600"* — and tick what's in your kitchen. It reads the live web across 8–10 different angles and pulls ~16 real recipe pages in parallel, independent blogs included, not a fixed catalogue. Five genuinely different dishes come back — different dishes, different styles, different sites — ranked by how much of each you **already own**, each showing the cost to cook, the time, the protein per serving, and a "you have 7 of 22" bar. Shakes, one-pan dinners, regional dishes nobody's app has heard of: if a blog published it properly, it's in range.
+Pick one and the reasoning starts. Your chilli powder doesn't cover green chillies. A ground spice blend doesn't cover a whole bay leaf. Fresh tomato isn't tomato purée. Whatever's genuinely missing gets scaled to how many you're feeding and rounded up to real pack sizes — you can't buy a quarter of a cinnamon stick.
 
-Pick one and it works out what you're genuinely missing — your chilli powder doesn't cover green chillies, a ground spice blend doesn't cover a whole bay leaf, fresh tomato isn't tomato purée. It scales to how many you're feeding, rounds up to real pack sizes, sources every item as a live Flipkart product with a real price and real stock, and fills the cart — proving each add by reading the cart back rather than trusting its own click.
+Then it shops. Every item becomes a live Flipkart product with a real price and real stock, added to your cart and **proved by reading the cart back** — never by trusting its own click. On a real run it asked for one garam masala, Flipkart quietly enforced a minimum of two, and the agent caught it.
+
+None of this has an API. Recipes live on independent food blogs; prices and stock live behind a retailer's own site. **Anakin is what made both reachable** — Search and URL Scraper for the web, Wire for live Flipkart product data, and four custom Flipkart Minutes actions its team built for us mid-hackathon.
 
 Then it stops. You open Flipkart and pay. The agent never pays, and never could.
 
