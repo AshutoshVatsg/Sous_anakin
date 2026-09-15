@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; width: 360px; font: 13px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: #faf8f4; color: #23241f;
+  }
+  header { padding: 14px 16px 10px; border-bottom: 1px solid #e6e2d8; }
+  h1 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { margin: 3px 0 0; font-size: 11.5px; color: #6b6a60; }
+  main { padding: 12px 16px 16px; }
+  label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #6b6a60; margin-bottom: 5px; }
+  textarea {
+    width: 100%; box-sizing: border-box; min-height: 74px; resize: vertical; padding: 8px 9px;
+    border: 1px solid #ddd8cc; border-radius: 7px; background: #fff; font: inherit; color: inherit;
+  }
+  textarea:focus { outline: 2px solid #3f6b3a44; border-color: #3f6b3a; }
+  button {
+    margin-top: 10px; width: 100%; padding: 9px 12px; border: 0; border-radius: 7px;
+    background: #3f6b3a; color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  button:hover:not(:disabled) { background: #355c31; }
+  button:disabled { background: #b9c4b6; cursor: default; }
+  #feed {
+    margin-top: 12px; max-height: 230px; overflow-y: auto; border-top: 1px solid #e6e2d8;
+    padding-top: 10px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11.5px;
+  }
+  #feed:empty { display: none; }
+  .row { display: flex; gap: 7px; padding: 2px 0; }
+  .tag { flex: 0 0 52px; color: #8a8879; }
+  .msg { flex: 1; word-break: break-word; }
+  .added .msg { color: #2f6b34; font-weight: 600; }
+  .failed .msg, .error .msg { color: #9d3b2f; }
+  .retry .msg, .warn .msg { color: #926b18; }
+  .done .msg { color: #2f6b34; font-weight: 600; }
+  footer { padding: 0 16px 14px; font-size: 11px; color: #8a8879; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Sous — cart handover</h1>
+    <p class="sub">Adds your shopping list to your own Flipkart cart. It never pays.</p>
+  </header>
+  <main>
+    <label for="items">Shopping list</label>
+    <textarea id="items" placeholder="paneer&#10;garam masala&#10;coriander leaves&#10;&#10;One per line, or paste the JSON Sous gave you."></textarea>
+    <button id="go">Add to my Flipkart cart</button>
+    <div id="feed"></div>
+  </main>
+  <footer>Be signed in to Flipkart, with a Minutes delivery address set.</footer>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -184,5 +184,17 @@
     "pack": "100 g",
     "name": "EVEREST Hot And Red Chilli Powder",
     "seenAt": "2026-09-14"
+  },
+  "curry leaves": {
+    "price": 25,
+    "pack": "45-55g",
+    "name": "Curry Leaves",
+    "seenAt": "2026-09-15"
+  },
+  "cashew nuts": {
+    "price": 336,
+    "pack": null,
+    "name": "TAVI Whole Cashews | 250GM| Crunchy & Creamy Kaju Nuts | High in Protein & Fiber Cashews",
+    "seenAt": "2026-09-15"
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback, useRef } from "react";
 import { streamPost } from "../lib/stream";
+import { detectExtension, fillViaExtension } from "../lib/extension";
 
 export const budgetLabel = (value, mode) =>
   value ? `${mode === "under" ? "under" : "around"} ₹${value}` : "Any budget";
@@ -177,7 +178,63 @@ export function useCooking() {
         "Stock first, then the click. Each addition is checked against the real cart.",
     });
     try {
-      await streamPost("/api/basket", { items: plan.buy }, (event) => {
+      // Where the adding happens depends on where this is running.
+      //
+      // Locally the server drives a Chrome you started on a debug port. Deployed it
+      // cannot: there is no browser on the server, and nobody should hand it their
+      // Flipkart login. So if the handover extension is installed, the adding runs
+      // in the visitor's OWN browser and their credentials never leave the machine.
+      // Same events either way, so the feed below does not care which path ran.
+      const ext = await detectExtension();
+      // Localhost normally keeps the server-driven fallback, because that is how
+      // the agent is developed. Add ?extonly to the URL to drop it and behave
+      // exactly like the deployed site — the only honest way to test the handover,
+      // since the fallback otherwise fills the cart anyway and hides a dead bridge.
+      const local =
+        typeof window !== "undefined" &&
+        /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname) &&
+        !new URLSearchParams(window.location.search).has("extonly");
+
+      // Hosted, with no extension: say the true thing rather than the local one.
+      // Falling through to /api/basket here tells a visitor to start Chrome with a
+      // debug port, which is advice about OUR laptop and useless on theirs.
+      if (!ext && !local) {
+        setError({
+          tone: "guide",
+          title: "One 30-second step, and the cart is yours.",
+          body:
+            "Filling a cart happens inside your own browser, so your Flipkart " +
+            "login never reaches us and we can never pay for you.",
+          steps: [
+            "Download the extension below and unzip it.",
+            "Open chrome://extensions and turn on Developer mode.",
+            "Choose Load unpacked and pick the unzipped folder.",
+            "Be signed in to Flipkart with a Minutes delivery address set.",
+            "Come back and press Add groceries again.",
+          ],
+          action: { label: "Download the Sous extension", href: "/sous-extension.zip" },
+        });
+        setNotice({
+          title: "The shopping list is ready. The cart is yours to fill.",
+          detail:
+            "Install the handover extension to add these to your own Flipkart cart.",
+        });
+        push({ type: "warn", message: "no Sous extension detected in this browser" });
+        return;
+      }
+
+      const run = ext
+        ? (onEvent) => fillViaExtension(plan.buy, onEvent)
+        : (onEvent) => streamPost("/api/basket", { items: plan.buy }, onEvent);
+
+      if (ext) {
+        push({
+          type: "wire",
+          message: `handing over to your browser via the Sous extension v${ext.version}`,
+        });
+      }
+
+      await run((event) => {
         if (event.type === "item" && event.data?.name) {
           setItemState((previous) => ({
             ...previous,
@@ -185,7 +242,7 @@ export function useCooking() {
           }));
           push(event);
         } else if (event.type === "done") {
-          setCart(event.data.cart);
+          if (event.data?.cart) setCart(event.data.cart);
           setCompleted(true);
           setNotice({
             title: `${event.data.added} of ${event.data.asked} added. Payment is yours.`,
@@ -194,7 +251,9 @@ export function useCooking() {
           });
           push(event);
         } else if (event.type === "cart") {
-          setCart(event.data.cart);
+          // Defensive: an event from the extension is a different transport to the
+          // SSE route, and a missing field should never take the page down.
+          if (event.data?.cart) setCart(event.data.cart);
           push(event);
         } else if (event.type === "error") {
           setError(event.message);

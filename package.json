@@ -9,7 +9,8 @@
     "start": "next start",
     "cli": "node run.js",
     "prices": "node prices.js",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "ext:zip": "powershell -NoProfile -Command \"Compress-Archive -Path extension/* -DestinationPath public/sous-extension.zip -Force\""
   },
   "keywords": [],
   "type": "module",

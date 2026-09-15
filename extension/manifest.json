@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Sous - cart handover",
+  "version": "1.0.0",
+  "description": "Adds the shopping list Sous worked out to your own Flipkart Minutes cart, in your own signed-in session. It never pays.",
+  "permissions": ["scripting", "tabs", "storage", "debugger"],
+  "host_permissions": ["https://www.flipkart.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Sous - cart handover"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:3000/*",
+        "http://127.0.0.1:3000/*",
+        "https://*.onrender.com/*"
+      ],
+      "js": ["bridge.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

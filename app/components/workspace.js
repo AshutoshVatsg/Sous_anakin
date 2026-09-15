@@ -325,14 +325,41 @@ export function ActivityFeed({ events, busy, phase = null, credits }) {
   );
 }
 
+/**
+ * `message` is normally a string. It can also be a structured notice —
+ * { title, body, steps[], action:{label,href}, tone } — for the cases that need
+ * to guide rather than apologise. Installing the handover extension is not a
+ * failure, and colouring it like one tells a visitor something untrue.
+ */
 export function ErrorNotice({ message }) {
   if (!message) return null;
+  const notice = typeof message === "string" ? { body: message } : message;
+  const {
+    title = "That step needs another try.",
+    body,
+    steps = [],
+    action = null,
+    tone = "error",
+  } = notice;
+
   return (
-    <div className="error-notice" role="alert">
-      <Icon name="alert" />
+    <div className={`error-notice tone-${tone}`} role="alert">
+      <Icon name={tone === "error" ? "alert" : "shield"} />
       <div>
-        <strong>That step needs another try.</strong>
-        <p>{message}</p>
+        <strong>{title}</strong>
+        {body ? <p>{body}</p> : null}
+        {steps.length ? (
+          <ol className="notice-steps">
+            {steps.map((step, i) => (
+              <li key={i}>{step}</li>
+            ))}
+          </ol>
+        ) : null}
+        {action ? (
+          <a className="notice-action" href={action.href} download>
+            {action.label}
+          </a>
+        ) : null}
       </div>
     </div>
   );

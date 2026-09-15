@@ -3242,3 +3242,31 @@ h4 {
     scroll-behavior: auto !important;
   }
 }
+
+/* The handover-extension prompt is guidance, not a failure. Same shape as an
+   error notice so the layout is unchanged, but calm colours — telling someone
+   they need to install something is not an apology. */
+.error-notice.tone-guide {
+  color: var(--ink-1);
+  background: var(--surface-2, rgba(63, 107, 58, 0.06));
+  border-color: color-mix(in srgb, var(--fresh, #3f6b3a) 28%, transparent);
+}
+.notice-steps {
+  margin: 9px 0 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.notice-steps li { margin-bottom: 2px; }
+.notice-action {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--fresh, #3f6b3a);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.notice-action:hover { filter: brightness(0.94); }
