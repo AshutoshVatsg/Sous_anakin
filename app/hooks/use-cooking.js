@@ -206,9 +206,9 @@ export function useCooking() {
             "Filling a cart happens inside your own browser, so your Flipkart " +
             "login never reaches us and we can never pay for you.",
           steps: [
-            "Download the extension below and unzip it.",
-            "Open chrome://extensions and turn on Developer mode.",
-            "Choose Load unpacked and pick the unzipped folder.",
+            "Download the zip below, then right-click it and choose Extract All (or Extract Here). You want the sous-extension folder it produces.",
+            "Open chrome://extensions and turn on Developer mode, top right.",
+            "Choose Load unpacked and select the sous-extension folder itself — not a file inside it.",
             "Be signed in to Flipkart with a Minutes delivery address set.",
             "Come back and press Add groceries again.",
           ],

@@ -10,7 +10,7 @@
     "cli": "node run.js",
     "prices": "node prices.js",
     "test": "node --test test/*.test.mjs",
-    "ext:zip": "powershell -NoProfile -Command \"Compress-Archive -Path extension/* -DestinationPath public/sous-extension.zip -Force\""
+    "ext:zip": "powershell -NoProfile -Command \"$s=Join-Path $env:TEMP souszip; if(Test-Path $s){Remove-Item $s -Recurse -Force}; New-Item -ItemType Directory (Join-Path $s sous-extension)|Out-Null; Copy-Item extension\\* (Join-Path $s sous-extension) -Recurse; Compress-Archive (Join-Path $s sous-extension) public/sous-extension.zip -Force; Remove-Item $s -Recurse -Force\""
   },
   "keywords": [],
   "type": "module",
